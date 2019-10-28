@@ -1,0 +1,54 @@
+{
+    "name": "QR",
+    "fields": [
+        {
+            "fieldName": "codigoQR",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fechaFinQR",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "fotoQR",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        },
+        {
+            "fieldName": "tipoVisira",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "persona",
+            "otherEntityRelationshipName": "qR",
+            "relationshipName": "qrAutorizador",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "persona",
+            "otherEntityRelationshipName": "qR",
+            "relationshipName": "qrAutorizado",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "domicilio",
+            "otherEntityRelationshipName": "qR",
+            "relationshipName": "qrDomicilio",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20191028203810",
+    "entityTableName": "qr",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

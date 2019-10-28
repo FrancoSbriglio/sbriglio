@@ -1,0 +1,54 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-mensaje-heading">Create or edit a Mensaje</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_fechaHoraMensaje">Fecha Hora Mensaje</label>
+                    <div class="d-flex">
+                        <input id="field_fechaHoraMensaje" type="datetime-local" class="form-control" name="fechaHoraMensaje" formControlName="fechaHoraMensaje" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_descripcionMensaje">Descripcion Mensaje</label>
+                    <input type="text" class="form-control" name="descripcionMensaje" id="field_descripcionMensaje"
+                           formControlName="descripcionMensaje"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_estadoMensaje">Estado Mensaje</label>
+                    <input type="text" class="form-control" name="estadoMensaje" id="field_estadoMensaje"
+                           formControlName="estadoMensaje"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_userDestino">User Destino</label>
+                    <select class="form-control" id="field_userDestino" name="userDestino" formControlName="userDestino">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="userOption.id === editForm.get('userDestino').value?.id ? editForm.get('userDestino').value : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_userOrigen">User Origen</label>
+                    <select class="form-control" id="field_userOrigen" name="userOrigen" formControlName="userOrigen">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="userOption.id === editForm.get('userOrigen').value?.id ? editForm.get('userOrigen').value : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

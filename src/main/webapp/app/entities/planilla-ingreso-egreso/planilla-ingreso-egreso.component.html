@@ -1,0 +1,115 @@
+<div>
+    <h2 id="page-heading">
+        <span>Planilla Ingreso Egresos</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-planilla-ingreso-egreso" [routerLink]="['/planilla-ingreso-egreso/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create a new Planilla Ingreso Egreso
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="planillaIngresoEgresos?.length === 0">
+        <span>No planillaIngresoEgresos found</span>
+    </div>
+    <div class="table-responsive" *ngIf="planillaIngresoEgresos?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Autorizado Previo</span></th>
+            <th><span>Acompaniantes</span></th>
+            <th><span>Fecha Ingreso</span></th>
+            <th><span>Fecha Egreso</span></th>
+            <th><span>Tipovisita</span></th>
+            <th><span>Ingreso A Pie</span></th>
+            <th><span>Planilla Barrio</span></th>
+            <th><span>Planilla Persona</span></th>
+            <th><span>Planilla Qr</span></th>
+            <th><span>Planilla Destino</span></th>
+            <th><span>Planilla Vehiculo</span></th>
+            <th><span>Planilla Empresa</span></th>
+            <th><span>Planilla Autorizador</span></th>
+            <th><span>Planilla Acompaniantes</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let planillaIngresoEgreso of planillaIngresoEgresos ;trackBy: trackId">
+                <td><a [routerLink]="['/planilla-ingreso-egreso', planillaIngresoEgreso.id, 'view' ]">{{planillaIngresoEgreso.id}}</a></td>
+                <td>{{planillaIngresoEgreso.autorizadoPrevio}}</td>
+                <td>{{planillaIngresoEgreso.acompaniantes}}</td>
+                <td>{{planillaIngresoEgreso.fechaIngreso | date:'medium'}}</td>
+                <td>{{planillaIngresoEgreso.fechaEgreso | date:'medium'}}</td>
+                <td>{{planillaIngresoEgreso.tipovisita}}</td>
+                <td>{{planillaIngresoEgreso.ingresoAPie}}</td>
+                <td>
+                    <div *ngIf="planillaIngresoEgreso.planillaBarrio">
+                        <a [routerLink]="['/barrio', planillaIngresoEgreso.planillaBarrio?.id, 'view' ]" >{{planillaIngresoEgreso.planillaBarrio?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="planillaIngresoEgreso.planillaPersona">
+                        <a [routerLink]="['/persona', planillaIngresoEgreso.planillaPersona?.id, 'view' ]" >{{planillaIngresoEgreso.planillaPersona?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="planillaIngresoEgreso.planillaQr">
+                        <a [routerLink]="['/qr', planillaIngresoEgreso.planillaQr?.id, 'view' ]" >{{planillaIngresoEgreso.planillaQr?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="planillaIngresoEgreso.planillaDestino">
+                        <a [routerLink]="['/domicilio', planillaIngresoEgreso.planillaDestino?.id, 'view' ]" >{{planillaIngresoEgreso.planillaDestino?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="planillaIngresoEgreso.planillaVehiculo">
+                        <a [routerLink]="['/vehiculo', planillaIngresoEgreso.planillaVehiculo?.id, 'view' ]" >{{planillaIngresoEgreso.planillaVehiculo?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="planillaIngresoEgreso.planillaEmpresa">
+                        <a [routerLink]="['/empresa', planillaIngresoEgreso.planillaEmpresa?.id, 'view' ]" >{{planillaIngresoEgreso.planillaEmpresa?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="planillaIngresoEgreso.planillaAutorizador">
+                        <a [routerLink]="['/persona', planillaIngresoEgreso.planillaAutorizador?.id, 'view' ]" >{{planillaIngresoEgreso.planillaAutorizador?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <span *ngFor="let planillaAcompaniantes of planillaIngresoEgreso.planillaAcompaniantes; let last = last">
+                            <a class="form-control-static" [routerLink]="['/persona', planillaAcompaniantes?.id, 'view' ]">{{planillaAcompaniantes.id}}</a>{{last ? '' : ', '}}
+                        </span>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/planilla-ingreso-egreso', planillaIngresoEgreso.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/planilla-ingreso-egreso', planillaIngresoEgreso.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/planilla-ingreso-egreso', { outlets: { popup: planillaIngresoEgreso.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

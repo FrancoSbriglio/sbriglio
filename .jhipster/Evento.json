@@ -1,0 +1,75 @@
+{
+    "name": "Evento",
+    "fields": [
+        {
+            "fieldName": "nombreEvento",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fecha",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "horaInicio",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "horaFin",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "domicilio",
+            "otherEntityRelationshipName": "evento",
+            "relationshipName": "eventoDomicilio",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "espacioComun",
+            "otherEntityRelationshipName": "evento",
+            "relationshipName": "eventoEspacio",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "persona",
+            "otherEntityRelationshipName": "evento",
+            "relationshipName": "eventoPersona",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "estadoEvento",
+            "otherEntityRelationshipName": "evento",
+            "relationshipName": "estadoEvento",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "periodoEspacioComun",
+            "otherEntityRelationshipName": "evento",
+            "relationshipName": "eventoPeriodo",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "detalleEvento",
+            "otherEntityRelationshipName": "evento",
+            "relationshipName": "eventoDetalle",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20191028203812",
+    "entityTableName": "evento",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

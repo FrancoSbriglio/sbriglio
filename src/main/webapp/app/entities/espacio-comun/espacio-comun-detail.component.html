@@ -1,0 +1,64 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="espacioComun">
+            <h2><span>Espacio Comun</span> {{espacioComun.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Nombre Espacio Comun</span></dt>
+                <dd>
+                    <span>{{espacioComun.nombreEspacioComun}}</span>
+                </dd>
+                <dt><span>Disponibilidad Desde</span></dt>
+                <dd>
+                    <span>{{espacioComun.disponibilidadDesde}}</span>
+                </dd>
+                <dt><span>Disponibilidad Hasta</span></dt>
+                <dd>
+                    <span>{{espacioComun.disponibilidadHasta}}</span>
+                </dd>
+                <dt><span>Foto Espacio Comun</span></dt>
+                <dd>
+                    <div *ngIf="espacioComun.fotoEspacioComun">
+                        <a (click)="openFile(espacioComun.fotoEspacioComunContentType, espacioComun.fotoEspacioComun)">
+                            <img [src]="'data:' + espacioComun.fotoEspacioComunContentType + ';base64,' + espacioComun.fotoEspacioComun" style="max-width: 100%;" alt="espacioComun image"/>
+                        </a>
+                        {{espacioComun.fotoEspacioComunContentType}}, {{byteSize(espacioComun.fotoEspacioComun)}}
+                    </div>
+                </dd>
+                <dt><span>Hora Desde</span></dt>
+                <dd>
+                    <span>{{espacioComun.horaDesde}}</span>
+                </dd>
+                <dt><span>Hora Hasta</span></dt>
+                <dd>
+                    <span>{{espacioComun.horaHasta}}</span>
+                </dd>
+                <dt><span>Espacio Barrio</span></dt>
+                <dd>
+                    <div *ngIf="espacioComun.espacioBarrio">
+                        <a [routerLink]="['/barrio', espacioComun.espacioBarrio?.id, 'view']">{{espacioComun.espacioBarrio?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Espacio Tipo</span></dt>
+                <dd>
+                    <span *ngFor="let espacioTipo of espacioComun.espacioTipos; let last = last">
+                        <a [routerLink]="['/periodo-espacio-comun', espacioTipo?.id, 'view' ]">{{espacioTipo.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/espacio-comun', espacioComun.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

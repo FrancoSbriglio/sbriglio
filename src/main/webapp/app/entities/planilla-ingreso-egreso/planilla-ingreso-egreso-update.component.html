@@ -1,0 +1,111 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-planilla-ingreso-egreso-heading">Create or edit a Planilla Ingreso Egreso</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_autorizadoPrevio">Autorizado Previo</label>
+                    <input type="checkbox" class="form-control" name="autorizadoPrevio" id="field_autorizadoPrevio"
+                           formControlName="autorizadoPrevio"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_acompaniantes">Acompaniantes</label>
+                    <input type="number" class="form-control" name="acompaniantes" id="field_acompaniantes"
+                           formControlName="acompaniantes"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_fechaIngreso">Fecha Ingreso</label>
+                    <div class="d-flex">
+                        <input id="field_fechaIngreso" type="datetime-local" class="form-control" name="fechaIngreso" formControlName="fechaIngreso" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_fechaEgreso">Fecha Egreso</label>
+                    <div class="d-flex">
+                        <input id="field_fechaEgreso" type="datetime-local" class="form-control" name="fechaEgreso" formControlName="fechaEgreso" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_tipovisita">Tipovisita</label>
+                    <input type="text" class="form-control" name="tipovisita" id="field_tipovisita"
+                           formControlName="tipovisita"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_ingresoAPie">Ingreso A Pie</label>
+                    <input type="checkbox" class="form-control" name="ingresoAPie" id="field_ingresoAPie"
+                           formControlName="ingresoAPie"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_planillaBarrio">Planilla Barrio</label>
+                    <select class="form-control" id="field_planillaBarrio" name="planillaBarrio" formControlName="planillaBarrio">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="barrioOption.id === editForm.get('planillaBarrio').value?.id ? editForm.get('planillaBarrio').value : barrioOption" *ngFor="let barrioOption of barrios; trackBy: trackBarrioById">{{barrioOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_planillaPersona">Planilla Persona</label>
+                    <select class="form-control" id="field_planillaPersona" name="planillaPersona" formControlName="planillaPersona">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="personaOption.id === editForm.get('planillaPersona').value?.id ? editForm.get('planillaPersona').value : personaOption" *ngFor="let personaOption of personas; trackBy: trackPersonaById">{{personaOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_planillaQr">Planilla Qr</label>
+                    <select class="form-control" id="field_planillaQr" name="planillaQr" formControlName="planillaQr">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="qROption.id === editForm.get('planillaQr').value?.id ? editForm.get('planillaQr').value : qROption" *ngFor="let qROption of qrs; trackBy: trackQRById">{{qROption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_planillaDestino">Planilla Destino</label>
+                    <select class="form-control" id="field_planillaDestino" name="planillaDestino" formControlName="planillaDestino">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="domicilioOption.id === editForm.get('planillaDestino').value?.id ? editForm.get('planillaDestino').value : domicilioOption" *ngFor="let domicilioOption of domicilios; trackBy: trackDomicilioById">{{domicilioOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_planillaVehiculo">Planilla Vehiculo</label>
+                    <select class="form-control" id="field_planillaVehiculo" name="planillaVehiculo" formControlName="planillaVehiculo">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="vehiculoOption.id === editForm.get('planillaVehiculo').value?.id ? editForm.get('planillaVehiculo').value : vehiculoOption" *ngFor="let vehiculoOption of vehiculos; trackBy: trackVehiculoById">{{vehiculoOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_planillaEmpresa">Planilla Empresa</label>
+                    <select class="form-control" id="field_planillaEmpresa" name="planillaEmpresa" formControlName="planillaEmpresa">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="empresaOption.id === editForm.get('planillaEmpresa').value?.id ? editForm.get('planillaEmpresa').value : empresaOption" *ngFor="let empresaOption of empresas; trackBy: trackEmpresaById">{{empresaOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_planillaAutorizador">Planilla Autorizador</label>
+                    <select class="form-control" id="field_planillaAutorizador" name="planillaAutorizador" formControlName="planillaAutorizador">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="personaOption.id === editForm.get('planillaAutorizador').value?.id ? editForm.get('planillaAutorizador').value : personaOption" *ngFor="let personaOption of personas; trackBy: trackPersonaById">{{personaOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="field_planillaAcompaniantes">Planilla Acompaniantes</label>
+                    <select class="form-control" id="field_planillaAcompaniantes" multiple name="planillaAcompaniantes" formControlName="planillaAcompaniantes">
+                        <option [ngValue]="getSelected(editForm.get('planillaAcompaniantes').value, personaOption)" *ngFor="let personaOption of personas; trackBy: trackPersonaById">{{personaOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity Evento.
+    -->
+    <changeSet id="20191028203812-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="evento_domicilio_id"
+                                 baseTableName="evento"
+                                 constraintName="fk_evento_evento_domicilio_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="domicilio"/>
+
+        <addForeignKeyConstraint baseColumnNames="evento_espacio_id"
+                                 baseTableName="evento"
+                                 constraintName="fk_evento_evento_espacio_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="espacio_comun"/>
+
+        <addForeignKeyConstraint baseColumnNames="evento_persona_id"
+                                 baseTableName="evento"
+                                 constraintName="fk_evento_evento_persona_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="persona"/>
+
+        <addForeignKeyConstraint baseColumnNames="estado_evento_id"
+                                 baseTableName="evento"
+                                 constraintName="fk_evento_estado_evento_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="estado_evento"/>
+
+        <addForeignKeyConstraint baseColumnNames="evento_periodo_id"
+                                 baseTableName="evento"
+                                 constraintName="fk_evento_evento_periodo_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="periodo_espacio_comun"/>
+
+        <addForeignKeyConstraint baseColumnNames="evento_id"
+                                 baseTableName="evento_evento_detalle"
+                                 constraintName="fk_evento_evento_detalle_evento_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="evento"/>
+
+        <addForeignKeyConstraint baseColumnNames="evento_detalle_id"
+                                 baseTableName="evento_evento_detalle"
+                                 constraintName="fk_evento_evento_detalle_evento_detalle_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="detalle_evento"/>
+        
+    </changeSet>
+</databaseChangeLog>

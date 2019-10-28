@@ -1,0 +1,34 @@
+{
+    "name": "Seguro",
+    "fields": [
+        {
+            "fieldName": "fechaVencimientoSeguro",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "vehiculo",
+            "otherEntityRelationshipName": "seguro",
+            "relationshipName": "seguroVehiculo",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "aseguradora",
+            "otherEntityRelationshipName": "seguro",
+            "relationshipName": "seguroAseguradora",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20191028203817",
+    "entityTableName": "seguro",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

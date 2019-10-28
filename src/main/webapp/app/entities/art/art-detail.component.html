@@ -1,0 +1,33 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="art">
+            <h2><span>Art</span> {{art.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Fecha Vencimiento Art</span></dt>
+                <dd>
+                    <span>{{art.fechaVencimientoArt}}</span>
+                </dd>
+                <dt><span>Art Dersona</span></dt>
+                <dd>
+                    <div *ngIf="art.artDersona">
+                        <a [routerLink]="['/persona', art.artDersona?.id, 'view']">{{art.artDersona?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/art', art.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

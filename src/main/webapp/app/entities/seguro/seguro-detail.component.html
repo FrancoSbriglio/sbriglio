@@ -1,0 +1,39 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="seguro">
+            <h2><span>Seguro</span> {{seguro.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Fecha Vencimiento Seguro</span></dt>
+                <dd>
+                    <span>{{seguro.fechaVencimientoSeguro}}</span>
+                </dd>
+                <dt><span>Seguro Vehiculo</span></dt>
+                <dd>
+                    <div *ngIf="seguro.seguroVehiculo">
+                        <a [routerLink]="['/vehiculo', seguro.seguroVehiculo?.id, 'view']">{{seguro.seguroVehiculo?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Seguro Aseguradora</span></dt>
+                <dd>
+                    <div *ngIf="seguro.seguroAseguradora">
+                        <a [routerLink]="['/aseguradora', seguro.seguroAseguradora?.id, 'view']">{{seguro.seguroAseguradora?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/seguro', seguro.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

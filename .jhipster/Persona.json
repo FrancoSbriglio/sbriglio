@@ -1,0 +1,62 @@
+{
+    "name": "Persona",
+    "fields": [
+        {
+            "fieldName": "nombrePersona",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "apellidoPersona",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "dniPersona",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "telefonoPersona",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "persona",
+            "relationshipName": "personaUser",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "barrio",
+            "otherEntityRelationshipName": "persona",
+            "relationshipName": "personabarrio",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "vehiculo",
+            "otherEntityRelationshipName": "persona",
+            "relationshipName": "vehiculo",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "domicilio",
+            "otherEntityRelationshipName": "domiciliopersona",
+            "relationshipName": "personadomicilio",
+            "otherEntityField": "id",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20191028203803",
+    "entityTableName": "persona",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,43 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="mensaje">
+            <h2><span>Mensaje</span> {{mensaje.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Fecha Hora Mensaje</span></dt>
+                <dd>
+                    <span>{{mensaje.fechaHoraMensaje}}</span>
+                </dd>
+                <dt><span>Descripcion Mensaje</span></dt>
+                <dd>
+                    <span>{{mensaje.descripcionMensaje}}</span>
+                </dd>
+                <dt><span>Estado Mensaje</span></dt>
+                <dd>
+                    <span>{{mensaje.estadoMensaje}}</span>
+                </dd>
+                <dt><span>User Destino</span></dt>
+                <dd>
+                    {{mensaje.userDestino?.id}}
+                </dd>
+                <dt><span>User Origen</span></dt>
+                <dd>
+                    {{mensaje.userOrigen?.id}}
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/mensaje', mensaje.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

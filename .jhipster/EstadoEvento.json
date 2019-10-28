@@ -1,0 +1,19 @@
+{
+    "name": "EstadoEvento",
+    "fields": [
+        {
+            "fieldName": "nombreEstadoEvento",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20191028203814",
+    "entityTableName": "estado_evento",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

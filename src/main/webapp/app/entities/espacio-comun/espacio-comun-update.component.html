@@ -1,0 +1,83 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-espacio-comun-heading">Create or edit a Espacio Comun</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_nombreEspacioComun">Nombre Espacio Comun</label>
+                    <input type="text" class="form-control" name="nombreEspacioComun" id="field_nombreEspacioComun"
+                           formControlName="nombreEspacioComun"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_disponibilidadDesde">Disponibilidad Desde</label>
+                    <div class="d-flex">
+                        <input id="field_disponibilidadDesde" type="datetime-local" class="form-control" name="disponibilidadDesde" formControlName="disponibilidadDesde" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_disponibilidadHasta">Disponibilidad Hasta</label>
+                    <div class="d-flex">
+                        <input id="field_disponibilidadHasta" type="datetime-local" class="form-control" name="disponibilidadHasta" formControlName="disponibilidadHasta" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_fotoEspacioComun">Foto Espacio Comun</label>
+                    <div>
+                        <img [src]="'data:' + editForm.get('fotoEspacioComunContentType').value + ';base64,' + editForm.get('fotoEspacioComun').value" style="max-height: 100px;" *ngIf="editForm.get('fotoEspacioComun').value" alt="espacioComun image"/>
+                        <div *ngIf="editForm.get('fotoEspacioComun').value" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{editForm.get('fotoEspacioComunContentType').value}}, {{byteSize(editForm.get('fotoEspacioComun').value)}}</span>
+                            <button type="button" (click)="clearInputImage('fotoEspacioComun', 'fotoEspacioComunContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_fotoEspacioComun" (change)="setFileData($event, 'fotoEspacioComun', true)" accept="image/*"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="fotoEspacioComun" id="field_fotoEspacioComun"
+                           formControlName="fotoEspacioComun"/>
+                    <input type="hidden" class="form-control" name="fotoEspacioComunContentType" id="field_fotoEspacioComunContentType"
+                           formControlName="fotoEspacioComunContentType" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_horaDesde">Hora Desde</label>
+                    <div class="d-flex">
+                        <input id="field_horaDesde" type="datetime-local" class="form-control" name="horaDesde" formControlName="horaDesde" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_horaHasta">Hora Hasta</label>
+                    <div class="d-flex">
+                        <input id="field_horaHasta" type="datetime-local" class="form-control" name="horaHasta" formControlName="horaHasta" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_espacioBarrio">Espacio Barrio</label>
+                    <select class="form-control" id="field_espacioBarrio" name="espacioBarrio" formControlName="espacioBarrio">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="barrioOption.id === editForm.get('espacioBarrio').value?.id ? editForm.get('espacioBarrio').value : barrioOption" *ngFor="let barrioOption of barrios; trackBy: trackBarrioById">{{barrioOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="field_espacioTipos">Espacio Tipo</label>
+                    <select class="form-control" id="field_espacioTipos" multiple name="espacioTipos" formControlName="espacioTipos">
+                        <option [ngValue]="getSelected(editForm.get('espacioTipos').value, periodoEspacioComunOption)" *ngFor="let periodoEspacioComunOption of periodoespaciocomuns; trackBy: trackPeriodoEspacioComunById">{{periodoEspacioComunOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

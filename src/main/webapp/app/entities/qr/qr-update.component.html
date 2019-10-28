@@ -1,0 +1,78 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-qr-heading">Create or edit a QR</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_codigoQR">Codigo QR</label>
+                    <input type="text" class="form-control" name="codigoQR" id="field_codigoQR"
+                           formControlName="codigoQR"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_fechaFinQR">Fecha Fin QR</label>
+                    <div class="d-flex">
+                        <input id="field_fechaFinQR" type="datetime-local" class="form-control" name="fechaFinQR" formControlName="fechaFinQR" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_fotoQR">Foto QR</label>
+                    <div>
+                        <img [src]="'data:' + editForm.get('fotoQRContentType').value + ';base64,' + editForm.get('fotoQR').value" style="max-height: 100px;" *ngIf="editForm.get('fotoQR').value" alt="qR image"/>
+                        <div *ngIf="editForm.get('fotoQR').value" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{editForm.get('fotoQRContentType').value}}, {{byteSize(editForm.get('fotoQR').value)}}</span>
+                            <button type="button" (click)="clearInputImage('fotoQR', 'fotoQRContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_fotoQR" (change)="setFileData($event, 'fotoQR', true)" accept="image/*"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="fotoQR" id="field_fotoQR"
+                           formControlName="fotoQR"/>
+                    <input type="hidden" class="form-control" name="fotoQRContentType" id="field_fotoQRContentType"
+                           formControlName="fotoQRContentType" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_tipoVisira">Tipo Visira</label>
+                    <input type="text" class="form-control" name="tipoVisira" id="field_tipoVisira"
+                           formControlName="tipoVisira"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_qrAutorizador">Qr Autorizador</label>
+                    <select class="form-control" id="field_qrAutorizador" name="qrAutorizador" formControlName="qrAutorizador">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="personaOption.id === editForm.get('qrAutorizador').value?.id ? editForm.get('qrAutorizador').value : personaOption" *ngFor="let personaOption of personas; trackBy: trackPersonaById">{{personaOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_qrAutorizado">Qr Autorizado</label>
+                    <select class="form-control" id="field_qrAutorizado" name="qrAutorizado" formControlName="qrAutorizado">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="personaOption.id === editForm.get('qrAutorizado').value?.id ? editForm.get('qrAutorizado').value : personaOption" *ngFor="let personaOption of personas; trackBy: trackPersonaById">{{personaOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_qrDomicilio">Qr Domicilio</label>
+                    <select class="form-control" id="field_qrDomicilio" name="qrDomicilio" formControlName="qrDomicilio">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="domicilioOption.id === editForm.get('qrDomicilio').value?.id ? editForm.get('qrDomicilio').value : domicilioOption" *ngFor="let domicilioOption of domicilios; trackBy: trackDomicilioById">{{domicilioOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

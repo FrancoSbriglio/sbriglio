@@ -1,0 +1,95 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="planillaIngresoEgreso">
+            <h2><span>Planilla Ingreso Egreso</span> {{planillaIngresoEgreso.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Autorizado Previo</span></dt>
+                <dd>
+                    <span>{{planillaIngresoEgreso.autorizadoPrevio}}</span>
+                </dd>
+                <dt><span>Acompaniantes</span></dt>
+                <dd>
+                    <span>{{planillaIngresoEgreso.acompaniantes}}</span>
+                </dd>
+                <dt><span>Fecha Ingreso</span></dt>
+                <dd>
+                    <span>{{planillaIngresoEgreso.fechaIngreso}}</span>
+                </dd>
+                <dt><span>Fecha Egreso</span></dt>
+                <dd>
+                    <span>{{planillaIngresoEgreso.fechaEgreso}}</span>
+                </dd>
+                <dt><span>Tipovisita</span></dt>
+                <dd>
+                    <span>{{planillaIngresoEgreso.tipovisita}}</span>
+                </dd>
+                <dt><span>Ingreso A Pie</span></dt>
+                <dd>
+                    <span>{{planillaIngresoEgreso.ingresoAPie}}</span>
+                </dd>
+                <dt><span>Planilla Barrio</span></dt>
+                <dd>
+                    <div *ngIf="planillaIngresoEgreso.planillaBarrio">
+                        <a [routerLink]="['/barrio', planillaIngresoEgreso.planillaBarrio?.id, 'view']">{{planillaIngresoEgreso.planillaBarrio?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Planilla Persona</span></dt>
+                <dd>
+                    <div *ngIf="planillaIngresoEgreso.planillaPersona">
+                        <a [routerLink]="['/persona', planillaIngresoEgreso.planillaPersona?.id, 'view']">{{planillaIngresoEgreso.planillaPersona?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Planilla Qr</span></dt>
+                <dd>
+                    <div *ngIf="planillaIngresoEgreso.planillaQr">
+                        <a [routerLink]="['/qr', planillaIngresoEgreso.planillaQr?.id, 'view']">{{planillaIngresoEgreso.planillaQr?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Planilla Destino</span></dt>
+                <dd>
+                    <div *ngIf="planillaIngresoEgreso.planillaDestino">
+                        <a [routerLink]="['/domicilio', planillaIngresoEgreso.planillaDestino?.id, 'view']">{{planillaIngresoEgreso.planillaDestino?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Planilla Vehiculo</span></dt>
+                <dd>
+                    <div *ngIf="planillaIngresoEgreso.planillaVehiculo">
+                        <a [routerLink]="['/vehiculo', planillaIngresoEgreso.planillaVehiculo?.id, 'view']">{{planillaIngresoEgreso.planillaVehiculo?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Planilla Empresa</span></dt>
+                <dd>
+                    <div *ngIf="planillaIngresoEgreso.planillaEmpresa">
+                        <a [routerLink]="['/empresa', planillaIngresoEgreso.planillaEmpresa?.id, 'view']">{{planillaIngresoEgreso.planillaEmpresa?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Planilla Autorizador</span></dt>
+                <dd>
+                    <div *ngIf="planillaIngresoEgreso.planillaAutorizador">
+                        <a [routerLink]="['/persona', planillaIngresoEgreso.planillaAutorizador?.id, 'view']">{{planillaIngresoEgreso.planillaAutorizador?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Planilla Acompaniantes</span></dt>
+                <dd>
+                    <span *ngFor="let planillaAcompaniantes of planillaIngresoEgreso.planillaAcompaniantes; let last = last">
+                        <a [routerLink]="['/persona', planillaAcompaniantes?.id, 'view' ]">{{planillaAcompaniantes.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/planilla-ingreso-egreso', planillaIngresoEgreso.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,69 @@
+<div>
+    <h2 id="page-heading">
+        <span>Seguros</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-seguro" [routerLink]="['/seguro/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create a new Seguro
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="seguros?.length === 0">
+        <span>No seguros found</span>
+    </div>
+    <div class="table-responsive" *ngIf="seguros?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Fecha Vencimiento Seguro</span></th>
+            <th><span>Seguro Vehiculo</span></th>
+            <th><span>Seguro Aseguradora</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let seguro of seguros ;trackBy: trackId">
+                <td><a [routerLink]="['/seguro', seguro.id, 'view' ]">{{seguro.id}}</a></td>
+                <td>{{seguro.fechaVencimientoSeguro | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="seguro.seguroVehiculo">
+                        <a [routerLink]="['/vehiculo', seguro.seguroVehiculo?.id, 'view' ]" >{{seguro.seguroVehiculo?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="seguro.seguroAseguradora">
+                        <a [routerLink]="['/aseguradora', seguro.seguroAseguradora?.id, 'view' ]" >{{seguro.seguroAseguradora?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/seguro', seguro.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/seguro', seguro.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/seguro', { outlets: { popup: seguro.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

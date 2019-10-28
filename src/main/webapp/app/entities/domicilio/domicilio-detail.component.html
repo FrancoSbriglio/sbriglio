@@ -1,0 +1,45 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="domicilio">
+            <h2><span>Domicilio</span> {{domicilio.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Casa Domicilio</span></dt>
+                <dd>
+                    <span>{{domicilio.casaDomicilio}}</span>
+                </dd>
+                <dt><span>Depto Domicilio</span></dt>
+                <dd>
+                    <span>{{domicilio.deptoDomicilio}}</span>
+                </dd>
+                <dt><span>Manzana Domicilio</span></dt>
+                <dd>
+                    <span>{{domicilio.manzanaDomicilio}}</span>
+                </dd>
+                <dt><span>Piso Domicilio</span></dt>
+                <dd>
+                    <span>{{domicilio.pisoDomicilio}}</span>
+                </dd>
+                <dt><span>Domiciliopersona</span></dt>
+                <dd>
+                    <span *ngFor="let domiciliopersona of domicilio.domiciliopersonas; let last = last">
+                        <a [routerLink]="['/persona', domiciliopersona?.id, 'view' ]">{{domiciliopersona.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/domicilio', domicilio.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

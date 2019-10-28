@@ -1,0 +1,31 @@
+{
+    "name": "Barrio",
+    "fields": [
+        {
+            "fieldName": "nombreBarrio",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "cuitBarrio",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "normaBarrio",
+            "otherEntityRelationshipName": "barrio",
+            "relationshipName": "barrioNorma",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20191028203801",
+    "entityTableName": "barrio",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

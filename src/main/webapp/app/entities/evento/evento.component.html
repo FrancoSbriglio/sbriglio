@@ -1,0 +1,99 @@
+<div>
+    <h2 id="page-heading">
+        <span>Eventos</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-evento" [routerLink]="['/evento/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create a new Evento
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="eventos?.length === 0">
+        <span>No eventos found</span>
+    </div>
+    <div class="table-responsive" *ngIf="eventos?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Nombre Evento</span></th>
+            <th><span>Fecha</span></th>
+            <th><span>Hora Inicio</span></th>
+            <th><span>Hora Fin</span></th>
+            <th><span>Evento Domicilio</span></th>
+            <th><span>Evento Espacio</span></th>
+            <th><span>Evento Persona</span></th>
+            <th><span>Estado Evento</span></th>
+            <th><span>Evento Periodo</span></th>
+            <th><span>Evento Detalle</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let evento of eventos ;trackBy: trackId">
+                <td><a [routerLink]="['/evento', evento.id, 'view' ]">{{evento.id}}</a></td>
+                <td>{{evento.nombreEvento}}</td>
+                <td>{{evento.fecha | date:'medium'}}</td>
+                <td>{{evento.horaInicio | date:'medium'}}</td>
+                <td>{{evento.horaFin | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="evento.eventoDomicilio">
+                        <a [routerLink]="['/domicilio', evento.eventoDomicilio?.id, 'view' ]" >{{evento.eventoDomicilio?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="evento.eventoEspacio">
+                        <a [routerLink]="['/espacio-comun', evento.eventoEspacio?.id, 'view' ]" >{{evento.eventoEspacio?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="evento.eventoPersona">
+                        <a [routerLink]="['/persona', evento.eventoPersona?.id, 'view' ]" >{{evento.eventoPersona?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="evento.estadoEvento">
+                        <a [routerLink]="['/estado-evento', evento.estadoEvento?.id, 'view' ]" >{{evento.estadoEvento?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="evento.eventoPeriodo">
+                        <a [routerLink]="['/periodo-espacio-comun', evento.eventoPeriodo?.id, 'view' ]" >{{evento.eventoPeriodo?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <span *ngFor="let eventoDetalle of evento.eventoDetalles; let last = last">
+                            <a class="form-control-static" [routerLink]="['/detalle-evento', eventoDetalle?.id, 'view' ]">{{eventoDetalle.id}}</a>{{last ? '' : ', '}}
+                        </span>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/evento', evento.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/evento', evento.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/evento', { outlets: { popup: evento.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

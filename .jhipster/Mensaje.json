@@ -1,0 +1,42 @@
+{
+    "name": "Mensaje",
+    "fields": [
+        {
+            "fieldName": "fechaHoraMensaje",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "descripcionMensaje",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "estadoMensaje",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "mensaje",
+            "relationshipName": "userDestino",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "mensaje",
+            "relationshipName": "userOrigen",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20191028203822",
+    "entityTableName": "mensaje",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

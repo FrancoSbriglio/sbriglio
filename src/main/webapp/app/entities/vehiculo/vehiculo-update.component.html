@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-vehiculo-heading">Create or edit a Vehiculo</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_dominio">Dominio</label>
+                    <input type="text" class="form-control" name="dominio" id="field_dominio"
+                           formControlName="dominio"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_vehiculoMarca">Vehiculo Marca</label>
+                    <select class="form-control" id="field_vehiculoMarca" name="vehiculoMarca" formControlName="vehiculoMarca">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="marcaOption.id === editForm.get('vehiculoMarca').value?.id ? editForm.get('vehiculoMarca').value : marcaOption" *ngFor="let marcaOption of marcas; trackBy: trackMarcaById">{{marcaOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_vehiculoModelo">Vehiculo Modelo</label>
+                    <select class="form-control" id="field_vehiculoModelo" name="vehiculoModelo" formControlName="vehiculoModelo">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="modeloOption.id === editForm.get('vehiculoModelo').value?.id ? editForm.get('vehiculoModelo').value : modeloOption" *ngFor="let modeloOption of modelos; trackBy: trackModeloById">{{modeloOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_vehiculoColor">Vehiculo Color</label>
+                    <select class="form-control" id="field_vehiculoColor" name="vehiculoColor" formControlName="vehiculoColor">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="colorOption.id === editForm.get('vehiculoColor').value?.id ? editForm.get('vehiculoColor').value : colorOption" *ngFor="let colorOption of colors; trackBy: trackColorById">{{colorOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

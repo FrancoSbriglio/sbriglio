@@ -1,0 +1,55 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="persona">
+            <h2><span>Persona</span> {{persona.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Nombre Persona</span></dt>
+                <dd>
+                    <span>{{persona.nombrePersona}}</span>
+                </dd>
+                <dt><span>Apellido Persona</span></dt>
+                <dd>
+                    <span>{{persona.apellidoPersona}}</span>
+                </dd>
+                <dt><span>Dni Persona</span></dt>
+                <dd>
+                    <span>{{persona.dniPersona}}</span>
+                </dd>
+                <dt><span>Telefono Persona</span></dt>
+                <dd>
+                    <span>{{persona.telefonoPersona}}</span>
+                </dd>
+                <dt><span>Persona User</span></dt>
+                <dd>
+                    {{persona.personaUser?.id}}
+                </dd>
+                <dt><span>Personabarrio</span></dt>
+                <dd>
+                    <div *ngIf="persona.personabarrio">
+                        <a [routerLink]="['/barrio', persona.personabarrio?.id, 'view']">{{persona.personabarrio?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Vehiculo</span></dt>
+                <dd>
+                    <span *ngFor="let vehiculo of persona.vehiculos; let last = last">
+                        <a [routerLink]="['/vehiculo', vehiculo?.id, 'view' ]">{{vehiculo.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/persona', persona.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

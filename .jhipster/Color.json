@@ -1,0 +1,19 @@
+{
+    "name": "Color",
+    "fields": [
+        {
+            "fieldName": "nombreColor",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20191028203816",
+    "entityTableName": "color",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

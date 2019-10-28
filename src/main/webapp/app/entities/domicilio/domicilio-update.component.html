@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-domicilio-heading">Create or edit a Domicilio</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_casaDomicilio">Casa Domicilio</label>
+                    <input type="text" class="form-control" name="casaDomicilio" id="field_casaDomicilio"
+                           formControlName="casaDomicilio"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_deptoDomicilio">Depto Domicilio</label>
+                    <input type="number" class="form-control" name="deptoDomicilio" id="field_deptoDomicilio"
+                           formControlName="deptoDomicilio"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_manzanaDomicilio">Manzana Domicilio</label>
+                    <input type="text" class="form-control" name="manzanaDomicilio" id="field_manzanaDomicilio"
+                           formControlName="manzanaDomicilio"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_pisoDomicilio">Piso Domicilio</label>
+                    <input type="number" class="form-control" name="pisoDomicilio" id="field_pisoDomicilio"
+                           formControlName="pisoDomicilio"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="field_domiciliopersonas">Domiciliopersona</label>
+                    <select class="form-control" id="field_domiciliopersonas" multiple name="domiciliopersonas" formControlName="domiciliopersonas">
+                        <option [ngValue]="getSelected(editForm.get('domiciliopersonas').value, personaOption)" *ngFor="let personaOption of personas; trackBy: trackPersonaById">{{personaOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

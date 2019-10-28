@@ -1,0 +1,35 @@
+{
+    "name": "ListaAmigos",
+    "fields": [
+        {
+            "fieldName": "nombreListaAmigos",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "persona",
+            "otherEntityRelationshipName": "listaAmigos",
+            "relationshipName": "pertenece",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "persona",
+            "otherEntityRelationshipName": "listaAmigos",
+            "relationshipName": "amigos",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20191028203805",
+    "entityTableName": "lista_amigos",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

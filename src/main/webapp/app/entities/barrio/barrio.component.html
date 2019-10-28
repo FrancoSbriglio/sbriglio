@@ -1,0 +1,65 @@
+<div>
+    <h2 id="page-heading">
+        <span>Barrios</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-barrio" [routerLink]="['/barrio/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create a new Barrio
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="barrios?.length === 0">
+        <span>No barrios found</span>
+    </div>
+    <div class="table-responsive" *ngIf="barrios?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Nombre Barrio</span></th>
+            <th><span>Cuit Barrio</span></th>
+            <th><span>Barrio Norma</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let barrio of barrios ;trackBy: trackId">
+                <td><a [routerLink]="['/barrio', barrio.id, 'view' ]">{{barrio.id}}</a></td>
+                <td>{{barrio.nombreBarrio}}</td>
+                <td>{{barrio.cuitBarrio}}</td>
+                <td>
+                    <div *ngIf="barrio.barrioNorma">
+                        <a [routerLink]="['/norma-barrio', barrio.barrioNorma?.id, 'view' ]" >{{barrio.barrioNorma?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/barrio', barrio.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/barrio', barrio.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/barrio', { outlets: { popup: barrio.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

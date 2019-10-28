@@ -1,0 +1,45 @@
+{
+    "name": "DetalleEvento",
+    "fields": [
+        {
+            "fieldName": "horaIngreso",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "horaEngreso",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "listaAmigos",
+            "otherEntityRelationshipName": "detalleEvento",
+            "relationshipName": "amigosevento",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "persona",
+            "otherEntityRelationshipName": "detalleEvento",
+            "relationshipName": "detallePersonaEvento",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "vehiculo",
+            "otherEntityRelationshipName": "detalleEvento",
+            "relationshipName": "detalleEventoVehiculo",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20191028203813",
+    "entityTableName": "detalle_evento",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,97 @@
+{
+    "name": "PlanillaIngresoEgreso",
+    "fields": [
+        {
+            "fieldName": "autorizadoPrevio",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "acompaniantes",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "fechaIngreso",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "fechaEgreso",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "tipovisita",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "ingresoAPie",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "barrio",
+            "otherEntityRelationshipName": "planillaIngresoEgreso",
+            "relationshipName": "planillaBarrio",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "persona",
+            "otherEntityRelationshipName": "planillaIngresoEgreso",
+            "relationshipName": "planillaPersona",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "qR",
+            "otherEntityRelationshipName": "planillaIngresoEgreso",
+            "relationshipName": "planillaQr",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "domicilio",
+            "otherEntityRelationshipName": "planillaIngresoEgreso",
+            "relationshipName": "planillaDestino",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "vehiculo",
+            "otherEntityRelationshipName": "planillaIngresoEgreso",
+            "relationshipName": "planillaVehiculo",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "empresa",
+            "otherEntityRelationshipName": "planillaIngresoEgreso",
+            "relationshipName": "planillaEmpresa",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "persona",
+            "otherEntityRelationshipName": "planillaIngresoEgreso",
+            "relationshipName": "planillaAutorizador",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "persona",
+            "otherEntityRelationshipName": "planillaIngresoEgreso",
+            "relationshipName": "planillaAcompaniantes",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20191028203809",
+    "entityTableName": "planilla_ingreso_egreso",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

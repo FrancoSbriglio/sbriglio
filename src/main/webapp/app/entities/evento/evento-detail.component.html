@@ -1,0 +1,75 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="evento">
+            <h2><span>Evento</span> {{evento.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Nombre Evento</span></dt>
+                <dd>
+                    <span>{{evento.nombreEvento}}</span>
+                </dd>
+                <dt><span>Fecha</span></dt>
+                <dd>
+                    <span>{{evento.fecha}}</span>
+                </dd>
+                <dt><span>Hora Inicio</span></dt>
+                <dd>
+                    <span>{{evento.horaInicio}}</span>
+                </dd>
+                <dt><span>Hora Fin</span></dt>
+                <dd>
+                    <span>{{evento.horaFin}}</span>
+                </dd>
+                <dt><span>Evento Domicilio</span></dt>
+                <dd>
+                    <div *ngIf="evento.eventoDomicilio">
+                        <a [routerLink]="['/domicilio', evento.eventoDomicilio?.id, 'view']">{{evento.eventoDomicilio?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Evento Espacio</span></dt>
+                <dd>
+                    <div *ngIf="evento.eventoEspacio">
+                        <a [routerLink]="['/espacio-comun', evento.eventoEspacio?.id, 'view']">{{evento.eventoEspacio?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Evento Persona</span></dt>
+                <dd>
+                    <div *ngIf="evento.eventoPersona">
+                        <a [routerLink]="['/persona', evento.eventoPersona?.id, 'view']">{{evento.eventoPersona?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Estado Evento</span></dt>
+                <dd>
+                    <div *ngIf="evento.estadoEvento">
+                        <a [routerLink]="['/estado-evento', evento.estadoEvento?.id, 'view']">{{evento.estadoEvento?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Evento Periodo</span></dt>
+                <dd>
+                    <div *ngIf="evento.eventoPeriodo">
+                        <a [routerLink]="['/periodo-espacio-comun', evento.eventoPeriodo?.id, 'view']">{{evento.eventoPeriodo?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Evento Detalle</span></dt>
+                <dd>
+                    <span *ngFor="let eventoDetalle of evento.eventoDetalles; let last = last">
+                        <a [routerLink]="['/detalle-evento', eventoDetalle?.id, 'view' ]">{{eventoDetalle.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/evento', evento.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+{
+    "name": "Vehiculo",
+    "fields": [
+        {
+            "fieldName": "dominio",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "marca",
+            "otherEntityRelationshipName": "vehiculo",
+            "relationshipName": "vehiculoMarca",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "modelo",
+            "otherEntityRelationshipName": "vehiculo",
+            "relationshipName": "vehiculoModelo",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "color",
+            "otherEntityRelationshipName": "vehiculo",
+            "relationshipName": "vehiculoColor",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20191028203815",
+    "entityTableName": "vehiculo",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

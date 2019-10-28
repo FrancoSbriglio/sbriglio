@@ -1,0 +1,28 @@
+{
+    "name": "Marca",
+    "fields": [
+        {
+            "fieldName": "nombreMarca",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "modelo",
+            "otherEntityRelationshipName": "marca",
+            "relationshipName": "modelo",
+            "otherEntityField": "nombreModelo",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20191028203819",
+    "entityTableName": "marca",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

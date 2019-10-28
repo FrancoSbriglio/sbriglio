@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity ListaAmigos.
+    -->
+    <changeSet id="20191028203805-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="pertenece_id"
+                                 baseTableName="lista_amigos"
+                                 constraintName="fk_lista_amigos_pertenece_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="persona"/>
+
+        <addForeignKeyConstraint baseColumnNames="lista_amigos_id"
+                                 baseTableName="lista_amigos_amigos"
+                                 constraintName="fk_lista_amigos_amigos_lista_amigos_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="lista_amigos"/>
+
+        <addForeignKeyConstraint baseColumnNames="amigos_id"
+                                 baseTableName="lista_amigos_amigos"
+                                 constraintName="fk_lista_amigos_amigos_amigos_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="persona"/>
+        
+    </changeSet>
+</databaseChangeLog>

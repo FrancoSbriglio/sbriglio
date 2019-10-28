@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity PlanillaIngresoEgreso.
+    -->
+    <changeSet id="20191028203809-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="planilla_barrio_id"
+                                 baseTableName="planilla_ingreso_egreso"
+                                 constraintName="fk_planilla_ingreso_egreso_planilla_barrio_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="barrio"/>
+
+        <addForeignKeyConstraint baseColumnNames="planilla_persona_id"
+                                 baseTableName="planilla_ingreso_egreso"
+                                 constraintName="fk_planilla_ingreso_egreso_planilla_persona_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="persona"/>
+
+        <addForeignKeyConstraint baseColumnNames="planilla_qr_id"
+                                 baseTableName="planilla_ingreso_egreso"
+                                 constraintName="fk_planilla_ingreso_egreso_planilla_qr_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="qr"/>
+
+        <addForeignKeyConstraint baseColumnNames="planilla_destino_id"
+                                 baseTableName="planilla_ingreso_egreso"
+                                 constraintName="fk_planilla_ingreso_egreso_planilla_destino_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="domicilio"/>
+
+        <addForeignKeyConstraint baseColumnNames="planilla_vehiculo_id"
+                                 baseTableName="planilla_ingreso_egreso"
+                                 constraintName="fk_planilla_ingreso_egreso_planilla_vehiculo_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="vehiculo"/>
+
+        <addForeignKeyConstraint baseColumnNames="planilla_empresa_id"
+                                 baseTableName="planilla_ingreso_egreso"
+                                 constraintName="fk_planilla_ingreso_egreso_planilla_empresa_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="empresa"/>
+
+        <addForeignKeyConstraint baseColumnNames="planilla_autorizador_id"
+                                 baseTableName="planilla_ingreso_egreso"
+                                 constraintName="fk_planilla_ingreso_egreso_planilla_autorizador_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="persona"/>
+
+        <addForeignKeyConstraint baseColumnNames="planilla_ingreso_egreso_id"
+                                 baseTableName="planilla_ingreso_egreso_planilla_acompaniantes"
+                                 constraintName="fk_planilla_ingreso_egreso_planilla_acompaniantes_planilla_ingreso_egreso_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="planilla_ingreso_egreso"/>
+
+        <addForeignKeyConstraint baseColumnNames="planilla_acompaniantes_id"
+                                 baseTableName="planilla_ingreso_egreso_planilla_acompaniantes"
+                                 constraintName="fk_planilla_ingreso_egreso_planilla_acompaniantes_planilla_acompaniantes_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="persona"/>
+        
+    </changeSet>
+</databaseChangeLog>

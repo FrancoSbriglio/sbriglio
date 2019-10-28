@@ -1,0 +1,40 @@
+{
+    "name": "Domicilio",
+    "fields": [
+        {
+            "fieldName": "casaDomicilio",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "deptoDomicilio",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "manzanaDomicilio",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "pisoDomicilio",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "persona",
+            "otherEntityRelationshipName": "personadomicilio",
+            "relationshipName": "domiciliopersona",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20191028203804",
+    "entityTableName": "domicilio",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

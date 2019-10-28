@@ -1,0 +1,23 @@
+{
+    "name": "NormaBarrio",
+    "fields": [
+        {
+            "fieldName": "titulonorma",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "descripcionnorma",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20191028203800",
+    "entityTableName": "norma_barrio",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

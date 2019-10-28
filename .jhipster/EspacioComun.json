@@ -1,0 +1,56 @@
+{
+    "name": "EspacioComun",
+    "fields": [
+        {
+            "fieldName": "nombreEspacioComun",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "disponibilidadDesde",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "disponibilidadHasta",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "fotoEspacioComun",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        },
+        {
+            "fieldName": "horaDesde",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "horaHasta",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "barrio",
+            "otherEntityRelationshipName": "espacioComun",
+            "relationshipName": "espacioBarrio",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "periodoEspacioComun",
+            "otherEntityRelationshipName": "espacioComun",
+            "relationshipName": "espacioTipo",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20191028203806",
+    "entityTableName": "espacio_comun",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

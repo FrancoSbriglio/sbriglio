@@ -1,0 +1,69 @@
+<div>
+    <h2 id="page-heading">
+        <span>Domicilios</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-domicilio" [routerLink]="['/domicilio/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create a new Domicilio
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="domicilios?.length === 0">
+        <span>No domicilios found</span>
+    </div>
+    <div class="table-responsive" *ngIf="domicilios?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Casa Domicilio</span></th>
+            <th><span>Depto Domicilio</span></th>
+            <th><span>Manzana Domicilio</span></th>
+            <th><span>Piso Domicilio</span></th>
+            <th><span>Domiciliopersona</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let domicilio of domicilios ;trackBy: trackId">
+                <td><a [routerLink]="['/domicilio', domicilio.id, 'view' ]">{{domicilio.id}}</a></td>
+                <td>{{domicilio.casaDomicilio}}</td>
+                <td>{{domicilio.deptoDomicilio}}</td>
+                <td>{{domicilio.manzanaDomicilio}}</td>
+                <td>{{domicilio.pisoDomicilio}}</td>
+                <td>
+                    <span *ngFor="let domiciliopersona of domicilio.domiciliopersonas; let last = last">
+                            <a class="form-control-static" [routerLink]="['/persona', domiciliopersona?.id, 'view' ]">{{domiciliopersona.id}}</a>{{last ? '' : ', '}}
+                        </span>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/domicilio', domicilio.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/domicilio', domicilio.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/domicilio', { outlets: { popup: domicilio.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

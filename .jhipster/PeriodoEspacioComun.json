@@ -1,0 +1,19 @@
+{
+    "name": "PeriodoEspacioComun",
+    "fields": [
+        {
+            "fieldName": "periodo",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20191028203807",
+    "entityTableName": "periodo_espacio_comun",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,88 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-evento-heading">Create or edit a Evento</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_nombreEvento">Nombre Evento</label>
+                    <input type="text" class="form-control" name="nombreEvento" id="field_nombreEvento"
+                           formControlName="nombreEvento"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_fecha">Fecha</label>
+                    <div class="d-flex">
+                        <input id="field_fecha" type="datetime-local" class="form-control" name="fecha" formControlName="fecha" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_horaInicio">Hora Inicio</label>
+                    <div class="d-flex">
+                        <input id="field_horaInicio" type="datetime-local" class="form-control" name="horaInicio" formControlName="horaInicio" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_horaFin">Hora Fin</label>
+                    <div class="d-flex">
+                        <input id="field_horaFin" type="datetime-local" class="form-control" name="horaFin" formControlName="horaFin" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_eventoDomicilio">Evento Domicilio</label>
+                    <select class="form-control" id="field_eventoDomicilio" name="eventoDomicilio" formControlName="eventoDomicilio">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="domicilioOption.id === editForm.get('eventoDomicilio').value?.id ? editForm.get('eventoDomicilio').value : domicilioOption" *ngFor="let domicilioOption of domicilios; trackBy: trackDomicilioById">{{domicilioOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_eventoEspacio">Evento Espacio</label>
+                    <select class="form-control" id="field_eventoEspacio" name="eventoEspacio" formControlName="eventoEspacio">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="espacioComunOption.id === editForm.get('eventoEspacio').value?.id ? editForm.get('eventoEspacio').value : espacioComunOption" *ngFor="let espacioComunOption of espaciocomuns; trackBy: trackEspacioComunById">{{espacioComunOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_eventoPersona">Evento Persona</label>
+                    <select class="form-control" id="field_eventoPersona" name="eventoPersona" formControlName="eventoPersona">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="personaOption.id === editForm.get('eventoPersona').value?.id ? editForm.get('eventoPersona').value : personaOption" *ngFor="let personaOption of personas; trackBy: trackPersonaById">{{personaOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_estadoEvento">Estado Evento</label>
+                    <select class="form-control" id="field_estadoEvento" name="estadoEvento" formControlName="estadoEvento">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="estadoEventoOption.id === editForm.get('estadoEvento').value?.id ? editForm.get('estadoEvento').value : estadoEventoOption" *ngFor="let estadoEventoOption of estadoeventos; trackBy: trackEstadoEventoById">{{estadoEventoOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_eventoPeriodo">Evento Periodo</label>
+                    <select class="form-control" id="field_eventoPeriodo" name="eventoPeriodo" formControlName="eventoPeriodo">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="periodoEspacioComunOption.id === editForm.get('eventoPeriodo').value?.id ? editForm.get('eventoPeriodo').value : periodoEspacioComunOption" *ngFor="let periodoEspacioComunOption of periodoespaciocomuns; trackBy: trackPeriodoEspacioComunById">{{periodoEspacioComunOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="field_eventoDetalles">Evento Detalle</label>
+                    <select class="form-control" id="field_eventoDetalles" multiple name="eventoDetalles" formControlName="eventoDetalles">
+                        <option [ngValue]="getSelected(editForm.get('eventoDetalles').value, detalleEventoOption)" *ngFor="let detalleEventoOption of detalleeventos; trackBy: trackDetalleEventoById">{{detalleEventoOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

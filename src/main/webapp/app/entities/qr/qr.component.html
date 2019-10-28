@@ -1,0 +1,86 @@
+<div>
+    <h2 id="page-heading">
+        <span>QRS</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-qr" [routerLink]="['/qr/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create a new QR
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="qRS?.length === 0">
+        <span>No qRS found</span>
+    </div>
+    <div class="table-responsive" *ngIf="qRS?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Codigo QR</span></th>
+            <th><span>Fecha Fin QR</span></th>
+            <th><span>Foto QR</span></th>
+            <th><span>Tipo Visira</span></th>
+            <th><span>Qr Autorizador</span></th>
+            <th><span>Qr Autorizado</span></th>
+            <th><span>Qr Domicilio</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let qR of qRS ;trackBy: trackId">
+                <td><a [routerLink]="['/qr', qR.id, 'view' ]">{{qR.id}}</a></td>
+                <td>{{qR.codigoQR}}</td>
+                <td>{{qR.fechaFinQR | date:'medium'}}</td>
+                <td>
+                    <a *ngIf="qR.fotoQR" (click)="openFile(qR.fotoQRContentType, qR.fotoQR)">
+                        <img [src]="'data:' + qR.fotoQRContentType + ';base64,' + qR.fotoQR" style="max-height: 30px;" alt="qR image"/>
+                    </a>
+                    <span *ngIf="qR.fotoQR">{{qR.fotoQRContentType}}, {{byteSize(qR.fotoQR)}}</span>
+                </td>
+                <td>{{qR.tipoVisira}}</td>
+                <td>
+                    <div *ngIf="qR.qrAutorizador">
+                        <a [routerLink]="['/persona', qR.qrAutorizador?.id, 'view' ]" >{{qR.qrAutorizador?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="qR.qrAutorizado">
+                        <a [routerLink]="['/persona', qR.qrAutorizado?.id, 'view' ]" >{{qR.qrAutorizado?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="qR.qrDomicilio">
+                        <a [routerLink]="['/domicilio', qR.qrDomicilio?.id, 'view' ]" >{{qR.qrDomicilio?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/qr', qR.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/qr', qR.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/qr', { outlets: { popup: qR.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

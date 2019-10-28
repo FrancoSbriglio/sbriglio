@@ -1,0 +1,41 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-barrio-heading">Create or edit a Barrio</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_nombreBarrio">Nombre Barrio</label>
+                    <input type="text" class="form-control" name="nombreBarrio" id="field_nombreBarrio"
+                           formControlName="nombreBarrio"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_cuitBarrio">Cuit Barrio</label>
+                    <input type="number" class="form-control" name="cuitBarrio" id="field_cuitBarrio"
+                           formControlName="cuitBarrio"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_barrioNorma">Barrio Norma</label>
+                    <select class="form-control" id="field_barrioNorma" name="barrioNorma" formControlName="barrioNorma">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="normaBarrioOption.id === editForm.get('barrioNorma').value?.id ? editForm.get('barrioNorma').value : normaBarrioOption" *ngFor="let normaBarrioOption of normabarrios; trackBy: trackNormaBarrioById">{{normaBarrioOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

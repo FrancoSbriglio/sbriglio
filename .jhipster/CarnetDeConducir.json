@@ -1,0 +1,35 @@
+{
+    "name": "CarnetDeConducir",
+    "fields": [
+        {
+            "fieldName": "categoria",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fechaOtorgamiento",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "fechaVencimiento",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "persona",
+            "otherEntityRelationshipName": "carnetDeConducir",
+            "relationshipName": "carnetPersona",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20191028203808",
+    "entityTableName": "carnet_de_conducir",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

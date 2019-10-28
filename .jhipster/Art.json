@@ -1,0 +1,27 @@
+{
+    "name": "Art",
+    "fields": [
+        {
+            "fieldName": "fechaVencimientoArt",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "persona",
+            "otherEntityRelationshipName": "art",
+            "relationshipName": "artDersona",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20191028203821",
+    "entityTableName": "art",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

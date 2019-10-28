@@ -1,0 +1,33 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="estadoPersona">
+            <h2><span>Estado Persona</span> {{estadoPersona.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Nombre Estado Persona</span></dt>
+                <dd>
+                    <span>{{estadoPersona.nombreEstadoPersona}}</span>
+                </dd>
+                <dt><span>Estado Persona</span></dt>
+                <dd>
+                    <div *ngIf="estadoPersona.estadoPersona">
+                        <a [routerLink]="['/persona', estadoPersona.estadoPersona?.id, 'view']">{{estadoPersona.estadoPersona?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/estado-persona', estadoPersona.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
