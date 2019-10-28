@@ -110,7 +110,7 @@ public class PersonaResource {
     @GetMapping("/personas/dni/{dnipersona}")
     public ResponseEntity<Persona> getPersona(@PathVariable Integer dnipersona) {
         log.debug("REST request to get Persona : {}", dnipersona);
-        Optional<Persona> persona = personaRepository.findByDniPersona(dnipersona);
+        Optional<Persona> persona = personaRepository.findAlldnipersona(dnipersona);
         return ResponseUtil.wrapOrNotFound(persona);
     }
 

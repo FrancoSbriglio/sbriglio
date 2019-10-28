@@ -35,7 +35,7 @@ public interface PersonaRepository extends JpaRepository<Persona, Long> {
     Optional<Persona> findOneWithEagerRelationships(@Param("id") Long id);
 
     @Query("select persona from Persona persona left join fetch persona.vehiculos where persona.dniPersona =:dniPersona")
-    Optional<Persona> findByDniPersona(@Param ("dniPersona") Integer dniPersona);
+    Optional<Persona> findAlldnipersona(@Param ("dniPersona") Integer dniPersona);
   
 
     @Query("select p from Persona p join p.personaUser.authorities a where a.name=:role")   
