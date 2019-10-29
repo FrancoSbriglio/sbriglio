@@ -104,10 +104,10 @@ public class ListaAmigosResource {
     }
 
     @GetMapping("/lista-amigos/dnilista/{dniPersona}")
-    public ResponseEntity<ListaAmigos> getListaAmigosdni(@PathVariable Integer dniPersona) {
+    public ListaAmigos getListaAmigosdni(@PathVariable Integer dniPersona) {
         log.debug("REST request to get ListaAmigos : {}", dniPersona);
-        Optional<ListaAmigos> listaAmigos = listaAmigosRepository.findAlllistadni(dniPersona);
-        return ResponseUtil.wrapOrNotFound(listaAmigos);
+        ListaAmigos listaAmigos = listaAmigosRepository.findAlllistadni(dniPersona);
+        return listaAmigos;
     }
 
     /**

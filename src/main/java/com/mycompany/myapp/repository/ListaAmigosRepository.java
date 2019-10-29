@@ -26,5 +26,5 @@ public interface ListaAmigosRepository extends JpaRepository<ListaAmigos, Long> 
     Optional<ListaAmigos> findOneWithEagerRelationships(@Param("id") Long id);
 
     @Query("select listaAmigos from ListaAmigos listaAmigos left join fetch listaAmigos.pertenece pe left join fetch listaAmigos.amigos la where pe.dniPersona =:dniPersona")
-    Optional<ListaAmigos> findAlllistadni(@Param("dniPersona") Integer dniPersona);
+    ListaAmigos findAlllistadni(@Param("dniPersona") Integer dniPersona);
 }
