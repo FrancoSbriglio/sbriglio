@@ -123,15 +123,9 @@ public class PersonaResource {
     }
 
     @GetMapping("/persona/userperson/")
-    public Persona getUserperson(@RequestParam Long id) { 
+    public List<Persona> getUserpersona(@RequestParam(required = false, defaultValue = "false") Long id) { //ya se que va param igual funciona lo probe para ver si no me tiraba error
         log.debug("REST request to get Persona : {}",id);
-        Persona persona = personaRepository.findAlluserperson(id);
-       // Set<Vehiculo> vehiculo = personaRepository.findAlluserpersonvehicle(id);
-        // for (Persona p : persona) {
-            // p.getPersonaUser().setAuthorities(vehiculo);
-         //   persona.setVehiculos(vehiculo);
-       //  } 
-        
+        List<Persona> persona = personaRepository.findAlluserperson(id);
         return persona;
     }
 

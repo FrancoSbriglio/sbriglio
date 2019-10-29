@@ -41,11 +41,11 @@ public interface PersonaRepository extends JpaRepository<Persona, Long> {
     @Query("select p from Persona p join p.personaUser.authorities a where a.name=:role")   
     List<Persona> findAlluserrol(@Param ("role") String role);
 
-    @Query("select p from Persona p join p.personaUser pu join p.personaUser.authorities join p.vehiculos where pu.id=:id")   
-    Persona findAlluserperson(@Param ("id") Long id);
+//     @Query("select p from Persona p join p.personaUser pu join p.personaUser.authorities join p.vehiculos where pu.id=:id")   
+//     Optional<Persona> findAlluserperson(@Param ("id") Long id);
 
-  //  @Query("select p.vehiculos from Persona p join p.personaUser pu where pu.id=:id")   
-   // Set<Vehiculo> findAlluserpersonvehicle(@Param ("id") Long id);
+//   //  @Query("select p.vehiculos from Persona p join p.personaUser pu where pu.id=:id")   
+//    // Set<Vehiculo> findAlluserpersonvehicle(@Param ("id") Long id);
 
     @Query("select p from Persona p join p.personaUser pu join p.personaUser.authorities where pu.email=:email")   
     Persona findAlluseremail(@Param ("email") String email);
@@ -59,4 +59,7 @@ public interface PersonaRepository extends JpaRepository<Persona, Long> {
 
     @Query("select p from Persona p join p.personadomicilios d where :id_casa = d.id")   
     List<Persona> findAlldomicilio1(@Param ("id_casa") Long id_casa);
+
+    @Query("select p from Persona p join p.personaUser pu where pu.id=:id")   
+    List<Persona> findAlluserperson(@Param ("id") Long id);
 }
