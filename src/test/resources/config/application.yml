@@ -90,7 +90,7 @@ jhipster:
       queue-size: 512
   mail:
     from: test@localhost
-    base-url: http://ingresar.ddns.net:8080/
+    base-url: http://localhost:8080/
   security:
     authentication:
       jwt:
