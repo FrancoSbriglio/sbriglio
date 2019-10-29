@@ -31,7 +31,7 @@ public class Persona implements Serializable {
     private Integer dniPersona;
 
     @Column(name = "telefono_persona")
-    private Integer telefonoPersona;
+    private Long telefonoPersona;
 
     @ManyToOne
     @JsonIgnoreProperties("personas")
@@ -99,16 +99,16 @@ public class Persona implements Serializable {
         this.dniPersona = dniPersona;
     }
 
-    public Integer getTelefonoPersona() {
+    public Long getTelefonoPersona() {
         return telefonoPersona;
     }
 
-    public Persona telefonoPersona(Integer telefonoPersona) {
-        this.telefonoPersona = telefonoPersona;
+    public Persona telefonoPersona(Long defaultTelefonoPersona) {
+        this.telefonoPersona = defaultTelefonoPersona;
         return this;
     }
 
-    public void setTelefonoPersona(Integer telefonoPersona) {
+    public void setTelefonoPersona(Long telefonoPersona) {
         this.telefonoPersona = telefonoPersona;
     }
 

@@ -48,8 +48,8 @@ public class PersonaResourceIT {
     private static final Integer UPDATED_DNI_PERSONA = 2;
     private static final Integer SMALLER_DNI_PERSONA = 1 - 1;
 
-    private static final Integer DEFAULT_TELEFONO_PERSONA = 1;
-    private static final Integer UPDATED_TELEFONO_PERSONA = 2;
+    private static final Long DEFAULT_TELEFONO_PERSONA = (long) 1;
+    private static final Long UPDATED_TELEFONO_PERSONA = (long) 2;
     private static final Integer SMALLER_TELEFONO_PERSONA = 1 - 1;
 
     @Autowired
