@@ -126,6 +126,8 @@ public class PersonaResource {
     public Persona getUserpersona(@RequestParam(required = false, defaultValue = "false") Long id) { //ya se que va param igual funciona lo probe para ver si no me tiraba error
         log.debug("REST request to get Persona : {}",id);
         Persona persona = personaRepository.findAlluserperson(id);
+        Set<Vehiculo> vehiculo = personaRepository.findAlluserperson1(id);
+        persona.setVehiculos(vehiculo);
         return persona;
     }
 
