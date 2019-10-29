@@ -126,10 +126,10 @@ public class PersonaResource {
     public Persona getUserperson(@RequestParam Long id) { 
         log.debug("REST request to get Persona : {}",id);
         Persona persona = personaRepository.findAlluserperson(id);
-        Set<Vehiculo> vehiculo = personaRepository.findAlluserpersonvehicle(id);
+       // Set<Vehiculo> vehiculo = personaRepository.findAlluserpersonvehicle(id);
         // for (Persona p : persona) {
             // p.getPersonaUser().setAuthorities(vehiculo);
-            persona.setVehiculos(vehiculo);
+         //   persona.setVehiculos(vehiculo);
        //  } 
         
         return persona;
