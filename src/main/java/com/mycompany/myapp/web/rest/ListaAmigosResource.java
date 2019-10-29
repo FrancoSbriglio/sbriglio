@@ -1,6 +1,7 @@
 package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.ListaAmigos;
+import com.mycompany.myapp.domain.Persona;
 import com.mycompany.myapp.repository.ListaAmigosRepository;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 
@@ -17,6 +18,7 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * REST controller for managing {@link com.mycompany.myapp.domain.ListaAmigos}.
@@ -104,9 +106,13 @@ public class ListaAmigosResource {
     }
 
     @GetMapping("/lista-amigos/dnilista/{dniPersona}")
-    public List<ListaAmigos> getListaAmigosdni(@PathVariable Integer dniPersona) {
+    public Set<ListaAmigos> getListaAmigosdni(@PathVariable Integer dniPersona) {
         log.debug("REST request to get ListaAmigos : {}", dniPersona);
-        List<ListaAmigos> listaAmigos = listaAmigosRepository.findAlllistadni(dniPersona);
+        Set<ListaAmigos> listaAmigos = listaAmigosRepository.findAlllistadni(dniPersona);
+        Set<Persona> listaAmigos1 = listaAmigosRepository.findAlllistadni1(dniPersona);
+        for(ListaAmigos la : listaAmigos){
+            la.setAmigos(listaAmigos1);;
+        }
         return listaAmigos;
     }
 
