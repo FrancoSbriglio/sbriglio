@@ -110,6 +110,13 @@ public class QRResource {
         return qR;
     }
 
+    @GetMapping("/qrs/domicilioqr/{id}")
+    public List<QR> getQRdom(@PathVariable Long id) {
+        log.debug("REST request to get QR : {}", id);
+        List<QR> qR = qRRepository.findAllqrdominio(id);
+        return qR;
+    }
+
     /**
      * {@code DELETE  /qrs/:id} : delete the "id" qR.
      *
