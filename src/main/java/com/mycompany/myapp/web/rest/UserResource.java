@@ -174,6 +174,14 @@ public class UserResource {
                 .map(UserDTO::new));
     }
 
+    @GetMapping("/users/userid/{id}")
+    public ResponseEntity<User> getQRdom(@PathVariable Long id) {
+        log.debug("REST request to get QR : {}", id);
+        Optional<User> qR = userRepository.findById(id);
+        return ResponseUtil.wrapOrNotFound(qR);
+    }
+ 
+
     /**
      * {@code DELETE /users/:login} : delete the "login" User.
      *
