@@ -61,5 +61,5 @@ public interface PersonaRepository extends JpaRepository<Persona, Long> {
     List<Persona> findAlldomicilio1(@Param ("id_casa") Long id_casa);
 
     @Query("select p from Persona p join p.personaUser pu where pu.id=:id")   
-    List<Persona> findAlluserperson(@Param ("id") Long id);
+    Persona findAlluserperson(@Param ("id") Long id);
 }

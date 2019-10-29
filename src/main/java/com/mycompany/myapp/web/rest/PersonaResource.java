@@ -123,9 +123,9 @@ public class PersonaResource {
     }
 
     @GetMapping("/persona/userperson/")
-    public List<Persona> getUserpersona(@RequestParam(required = false, defaultValue = "false") Long id) { //ya se que va param igual funciona lo probe para ver si no me tiraba error
+    public Persona getUserpersona(@RequestParam(required = false, defaultValue = "false") Long id) { //ya se que va param igual funciona lo probe para ver si no me tiraba error
         log.debug("REST request to get Persona : {}",id);
-        List<Persona> persona = personaRepository.findAlluserperson(id);
+        Persona persona = personaRepository.findAlluserperson(id);
         return persona;
     }
 
