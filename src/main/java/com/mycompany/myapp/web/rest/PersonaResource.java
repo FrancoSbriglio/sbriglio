@@ -131,17 +131,7 @@ public class PersonaResource {
         return persona;
     }
 
-    @GetMapping("/persona/useremail/{email}")
-    public Persona getUserperson(@PathVariable String email) { 
-        log.debug("REST request to get Persona : {}",email);
-        Persona persona = personaRepository.findAlluseremail(email);
-        Set<Authority> auth = personaRepository.findAlluserperson1(email);
-       //  for (Persona p : persona) {
-            persona.getPersonaUser().setAuthorities(auth);
-         //} 
-        
-        return persona;
-    }
+
 
     @GetMapping("/personasdom/domicilio/{id}")
     public List<Persona> getPersonadom(@PathVariable Long id) {
@@ -153,6 +143,18 @@ public class PersonaResource {
         List<Persona> persona = personaRepository.findAlldomicilio1(id_casa);  
          return persona;
      } 
+
+     @GetMapping("/persona/useremail/{email}")
+     public Persona getUserperson(@PathVariable String email) { 
+         log.debug("REST request to get Persona : {}",email);
+         Persona persona = personaRepository.findAlluseremail(email);
+         Set<Authority> auth = personaRepository.findAlluseremail1(email);
+        //  for (Persona p : persona) {
+             persona.getPersonaUser().setAuthorities(auth);
+          //} 
+         
+         return persona;
+     }
 
     /**
      * {@code DELETE  /personas/:id} : delete the "id" persona.

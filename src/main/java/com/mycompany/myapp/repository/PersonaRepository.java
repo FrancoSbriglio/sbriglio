@@ -51,7 +51,7 @@ public interface PersonaRepository extends JpaRepository<Persona, Long> {
     Persona findAlluseremail(@Param ("email") String email);
 
     @Query("select p.personaUser.authorities from Persona p  where p.personaUser.email=:email")   
-    Set<Authority> findAlluserperson1(@Param ("email") String email);
+    Set<Authority> findAlluseremail1(@Param ("email") String email);
 
       
     @Query("select p.personadomicilios from Persona p where p.id=:id")   
