@@ -107,9 +107,9 @@ public class QRResource {
     }
 
     @GetMapping("/qrs/personaqr/{codigoqr}")
-    public List<QR> getQR(@PathVariable String codigoqr) {
+    public QR getQR(@PathVariable String codigoqr) {
         log.debug("REST request to get QR : {}", codigoqr);
-        List<QR> qR = qRRepository.findAllqrpersona(codigoqr);
+        QR qR = qRRepository.findAllqrpersona(codigoqr);
         return qR;
     }
 
