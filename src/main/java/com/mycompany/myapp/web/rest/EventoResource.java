@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -101,6 +101,14 @@ public class EventoResource {
         log.debug("REST request to get Evento : {}", id);
         Optional<Evento> evento = eventoRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(evento);
+    }
+
+    @GetMapping("/eventos/espaciofecha/")
+    public List<Evento> getEvento(@RequestParam(name="fecha") String  fecha,@RequestParam(name="nombre")   String  nombre) {
+        log.debug("REST request to get Evento : {}", nombre);
+        ZonedDateTime fecha1 = ZonedDateTime.parse(fecha);
+        List<Evento> evento = eventoRepository.findAlleventosdia(fecha1,nombre);
+        return evento;
     }
 
     /**

@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,5 +25,9 @@ public interface EventoRepository extends JpaRepository<Evento, Long> {
 
     @Query("select evento from Evento evento left join fetch evento.eventoDetalles where evento.id =:id")
     Optional<Evento> findOneWithEagerRelationships(@Param("id") Long id);
+
+    @Query("select e from Evento e  join e.eventoEspacio ec where e.fecha =:fecha and ec.nombreEspacioComun=:nombre")
+    List<Evento> findAlleventosdia(@Param("fecha") ZonedDateTime fecha,@Param("nombre") String nombre);
+
 
 }
