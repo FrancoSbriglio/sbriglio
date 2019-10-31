@@ -44,7 +44,7 @@ public class QR implements Serializable {
     private Persona qrAutorizado;
 
     @ManyToOne
-    @JsonIgnoreProperties("qRS")
+    //@JsonIgnoreProperties("qRS")
     private Domicilio qrDomicilio;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

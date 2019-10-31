@@ -1,5 +1,7 @@
 package com.mycompany.myapp.web.rest;
 
+import com.mycompany.myapp.domain.Domicilio;
+import com.mycompany.myapp.domain.Persona;
 import com.mycompany.myapp.domain.QR;
 import com.mycompany.myapp.repository.QRRepository;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
@@ -17,6 +19,7 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * REST controller for managing {@link com.mycompany.myapp.domain.QR}.
@@ -116,6 +119,18 @@ public class QRResource {
         List<QR> qR = qRRepository.findAllqrdominio(id);
         return qR;
     }
+
+    @GetMapping("/qrs/qrautorizado/{id}")
+    public List<QR> getQRauth(@PathVariable Long id) {
+        log.debug("REST request to get QR : {}", id);
+        List<QR> qR = qRRepository.findAllautorizado(id);
+        Domicilio qR1 = qRRepository.findAllautorizado1(id);
+         for (QR q : qR) {
+            q.setQrDomicilio(qR1);
+        } 
+        return qR;
+    }
+
 
     /**
      * {@code DELETE  /qrs/:id} : delete the "id" qR.
