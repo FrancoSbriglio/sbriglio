@@ -103,6 +103,13 @@ public class SeguroResource {
         return ResponseUtil.wrapOrNotFound(seguro);
     }
 
+    @GetMapping("/seguros/vehiculo/{id}")
+    public ResponseEntity<Seguro> getSegurovehiculo(@PathVariable Long id) {
+        log.debug("REST request to get Seguro : {}", id);
+        Optional<Seguro> seguro = seguroRepository.findAllseguro(id);
+        return ResponseUtil.wrapOrNotFound(seguro);
+    }
+
     /**
      * {@code DELETE  /seguros/:id} : delete the "id" seguro.
      *
