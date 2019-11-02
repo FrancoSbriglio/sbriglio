@@ -9,11 +9,9 @@
                 <dd>
                     <span>{{estadoPersona.nombreEstadoPersona}}</span>
                 </dd>
-                <dt><span>Estado Persona</span></dt>
+                <dt><span>Fecha</span></dt>
                 <dd>
-                    <div *ngIf="estadoPersona.estadoPersona">
-                        <a [routerLink]="['/persona', estadoPersona.estadoPersona?.id, 'view']">{{estadoPersona.estadoPersona?.id}}</a>
-                    </div>
+                    <span>{{estadoPersona.fecha}}</span>
                 </dd>
             </dl>
 

@@ -103,12 +103,6 @@ public class EstadoPersonaResource {
         return ResponseUtil.wrapOrNotFound(estadoPersona);
     }
 
-    @GetMapping("/estado/personas/{id}")
-    public ResponseEntity<EstadoPersona> getEstadoPersonas(@PathVariable Long id) {
-        log.debug("REST request to get EstadoPersona : {}", id);
-        Optional<EstadoPersona> estadoPersona = estadoPersonaRepository.findAllestados(id);
-        return ResponseUtil.wrapOrNotFound(estadoPersona);
-    }
     /**
      * {@code DELETE  /estado-personas/:id} : delete the "id" estadoPersona.
      *

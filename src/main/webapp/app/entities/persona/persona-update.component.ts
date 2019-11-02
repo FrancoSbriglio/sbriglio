@@ -9,6 +9,8 @@ import { filter, map } from 'rxjs/operators';
 import { JhiAlertService } from 'ng-jhipster';
 import { IPersona, Persona } from 'app/shared/model/persona.model';
 import { PersonaService } from './persona.service';
+import { IEstadoPersona } from 'app/shared/model/estado-persona.model';
+import { EstadoPersonaService } from 'app/entities/estado-persona/estado-persona.service';
 import { IUser } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';
 import { IBarrio } from 'app/shared/model/barrio.model';
@@ -25,6 +27,8 @@ import { DomicilioService } from 'app/entities/domicilio/domicilio.service';
 export class PersonaUpdateComponent implements OnInit {
   isSaving: boolean;
 
+  estadopersonas: IEstadoPersona[];
+
   users: IUser[];
 
   barrios: IBarrio[];
@@ -39,6 +43,7 @@ export class PersonaUpdateComponent implements OnInit {
     apellidoPersona: [],
     dniPersona: [],
     telefonoPersona: [],
+    personaEstado: [],
     personaUser: [],
     personabarrio: [],
     vehiculos: []
@@ -47,6 +52,7 @@ export class PersonaUpdateComponent implements OnInit {
   constructor(
     protected jhiAlertService: JhiAlertService,
     protected personaService: PersonaService,
+    protected estadoPersonaService: EstadoPersonaService,
     protected userService: UserService,
     protected barrioService: BarrioService,
     protected vehiculoService: VehiculoService,
@@ -60,6 +66,13 @@ export class PersonaUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ persona }) => {
       this.updateForm(persona);
     });
+    this.estadoPersonaService
+      .query()
+      .pipe(
+        filter((mayBeOk: HttpResponse<IEstadoPersona[]>) => mayBeOk.ok),
+        map((response: HttpResponse<IEstadoPersona[]>) => response.body)
+      )
+      .subscribe((res: IEstadoPersona[]) => (this.estadopersonas = res), (res: HttpErrorResponse) => this.onError(res.message));
     this.userService
       .query()
       .pipe(
@@ -97,6 +110,7 @@ export class PersonaUpdateComponent implements OnInit {
       apellidoPersona: persona.apellidoPersona,
       dniPersona: persona.dniPersona,
       telefonoPersona: persona.telefonoPersona,
+      personaEstado: persona.personaEstado,
       personaUser: persona.personaUser,
       personabarrio: persona.personabarrio,
       vehiculos: persona.vehiculos
@@ -125,6 +139,7 @@ export class PersonaUpdateComponent implements OnInit {
       apellidoPersona: this.editForm.get(['apellidoPersona']).value,
       dniPersona: this.editForm.get(['dniPersona']).value,
       telefonoPersona: this.editForm.get(['telefonoPersona']).value,
+      personaEstado: this.editForm.get(['personaEstado']).value,
       personaUser: this.editForm.get(['personaUser']).value,
       personabarrio: this.editForm.get(['personabarrio']).value,
       vehiculos: this.editForm.get(['vehiculos']).value
@@ -145,6 +160,10 @@ export class PersonaUpdateComponent implements OnInit {
   }
   protected onError(errorMessage: string) {
     this.jhiAlertService.error(errorMessage, null, null);
+  }
+
+  trackEstadoPersonaById(index: number, item: IEstadoPersona) {
+    return item.id;
   }
 
   trackUserById(index: number, item: IUser) {

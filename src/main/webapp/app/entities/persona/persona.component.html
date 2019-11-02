@@ -22,6 +22,7 @@
             <th><span>Apellido Persona</span></th>
             <th><span>Dni Persona</span></th>
             <th><span>Telefono Persona</span></th>
+            <th><span>Persona Estado</span></th>
             <th><span>Persona User</span></th>
             <th><span>Personabarrio</span></th>
             <th><span>Vehiculo</span></th>
@@ -35,6 +36,11 @@
                 <td>{{persona.apellidoPersona}}</td>
                 <td>{{persona.dniPersona}}</td>
                 <td>{{persona.telefonoPersona}}</td>
+                <td>
+                    <div *ngIf="persona.personaEstado">
+                        <a [routerLink]="['/estado-persona', persona.personaEstado?.id, 'view' ]" >{{persona.personaEstado?.id}}</a>
+                    </div>
+                </td>
                 <td>
                     {{persona.personaUser?.id}}
                 </td>

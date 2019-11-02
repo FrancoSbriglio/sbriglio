@@ -19,8 +19,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
+import java.time.Instant;
+import java.time.ZonedDateTime;
+import java.time.ZoneOffset;
+import java.time.ZoneId;
 import java.util.List;
 
+import static com.mycompany.myapp.web.rest.TestUtil.sameInstant;
 import static com.mycompany.myapp.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -35,6 +40,10 @@ public class EstadoPersonaResourceIT {
 
     private static final String DEFAULT_NOMBRE_ESTADO_PERSONA = "AAAAAAAAAA";
     private static final String UPDATED_NOMBRE_ESTADO_PERSONA = "BBBBBBBBBB";
+
+    private static final ZonedDateTime DEFAULT_FECHA = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
+    private static final ZonedDateTime UPDATED_FECHA = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final ZonedDateTime SMALLER_FECHA = ZonedDateTime.ofInstant(Instant.ofEpochMilli(-1L), ZoneOffset.UTC);
 
     @Autowired
     private EstadoPersonaRepository estadoPersonaRepository;
@@ -78,7 +87,8 @@ public class EstadoPersonaResourceIT {
      */
     public static EstadoPersona createEntity(EntityManager em) {
         EstadoPersona estadoPersona = new EstadoPersona()
-            .nombreEstadoPersona(DEFAULT_NOMBRE_ESTADO_PERSONA);
+            .nombreEstadoPersona(DEFAULT_NOMBRE_ESTADO_PERSONA)
+            .fecha(DEFAULT_FECHA);
         return estadoPersona;
     }
     /**
@@ -89,7 +99,8 @@ public class EstadoPersonaResourceIT {
      */
     public static EstadoPersona createUpdatedEntity(EntityManager em) {
         EstadoPersona estadoPersona = new EstadoPersona()
-            .nombreEstadoPersona(UPDATED_NOMBRE_ESTADO_PERSONA);
+            .nombreEstadoPersona(UPDATED_NOMBRE_ESTADO_PERSONA)
+            .fecha(UPDATED_FECHA);
         return estadoPersona;
     }
 
@@ -114,6 +125,7 @@ public class EstadoPersonaResourceIT {
         assertThat(estadoPersonaList).hasSize(databaseSizeBeforeCreate + 1);
         EstadoPersona testEstadoPersona = estadoPersonaList.get(estadoPersonaList.size() - 1);
         assertThat(testEstadoPersona.getNombreEstadoPersona()).isEqualTo(DEFAULT_NOMBRE_ESTADO_PERSONA);
+        assertThat(testEstadoPersona.getFecha()).isEqualTo(DEFAULT_FECHA);
     }
 
     @Test
@@ -147,7 +159,8 @@ public class EstadoPersonaResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(estadoPersona.getId().intValue())))
-            .andExpect(jsonPath("$.[*].nombreEstadoPersona").value(hasItem(DEFAULT_NOMBRE_ESTADO_PERSONA.toString())));
+            .andExpect(jsonPath("$.[*].nombreEstadoPersona").value(hasItem(DEFAULT_NOMBRE_ESTADO_PERSONA.toString())))
+            .andExpect(jsonPath("$.[*].fecha").value(hasItem(sameInstant(DEFAULT_FECHA))));
     }
     
     @Test
@@ -161,7 +174,8 @@ public class EstadoPersonaResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(estadoPersona.getId().intValue()))
-            .andExpect(jsonPath("$.nombreEstadoPersona").value(DEFAULT_NOMBRE_ESTADO_PERSONA.toString()));
+            .andExpect(jsonPath("$.nombreEstadoPersona").value(DEFAULT_NOMBRE_ESTADO_PERSONA.toString()))
+            .andExpect(jsonPath("$.fecha").value(sameInstant(DEFAULT_FECHA)));
     }
 
     @Test
@@ -185,7 +199,8 @@ public class EstadoPersonaResourceIT {
         // Disconnect from session so that the updates on updatedEstadoPersona are not directly saved in db
         em.detach(updatedEstadoPersona);
         updatedEstadoPersona
-            .nombreEstadoPersona(UPDATED_NOMBRE_ESTADO_PERSONA);
+            .nombreEstadoPersona(UPDATED_NOMBRE_ESTADO_PERSONA)
+            .fecha(UPDATED_FECHA);
 
         restEstadoPersonaMockMvc.perform(put("/api/estado-personas")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -197,6 +212,7 @@ public class EstadoPersonaResourceIT {
         assertThat(estadoPersonaList).hasSize(databaseSizeBeforeUpdate);
         EstadoPersona testEstadoPersona = estadoPersonaList.get(estadoPersonaList.size() - 1);
         assertThat(testEstadoPersona.getNombreEstadoPersona()).isEqualTo(UPDATED_NOMBRE_ESTADO_PERSONA);
+        assertThat(testEstadoPersona.getFecha()).isEqualTo(UPDATED_FECHA);
     }
 
     @Test

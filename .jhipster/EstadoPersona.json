@@ -4,17 +4,13 @@
         {
             "fieldName": "nombreEstadoPersona",
             "fieldType": "String"
-        }
-    ],
-    "relationships": [
+        },
         {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "persona",
-            "otherEntityRelationshipName": "estadoPersona",
-            "relationshipName": "estadoPersona",
-            "otherEntityField": "id"
+            "fieldName": "fecha",
+            "fieldType": "ZonedDateTime"
         }
     ],
+    "relationships": [],
     "changelogDate": "20191028203802",
     "entityTableName": "estado_persona",
     "dto": "no",

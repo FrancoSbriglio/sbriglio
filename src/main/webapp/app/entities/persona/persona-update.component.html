@@ -31,6 +31,13 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="form-control-label" for="field_personaEstado">Persona Estado</label>
+                    <select class="form-control" id="field_personaEstado" name="personaEstado" formControlName="personaEstado">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="estadoPersonaOption.id === editForm.get('personaEstado').value?.id ? editForm.get('personaEstado').value : estadoPersonaOption" *ngFor="let estadoPersonaOption of estadopersonas; trackBy: trackEstadoPersonaById">{{estadoPersonaOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label class="form-control-label" for="field_personaUser">Persona User</label>
                     <select class="form-control" id="field_personaUser" name="personaUser" formControlName="personaUser">
                         <option [ngValue]="null"></option>

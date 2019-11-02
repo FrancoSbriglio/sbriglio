@@ -28,6 +28,9 @@
             <column name="telefono_persona" type="integer">
                 <constraints nullable="true" />
             </column>
+            <column name="persona_estado_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
             <column name="persona_user_id" type="bigint">
                 <constraints nullable="true" />
             </column>

@@ -5,12 +5,10 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
-import { JhiAlertService } from 'ng-jhipster';
+import * as moment from 'moment';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { IEstadoPersona, EstadoPersona } from 'app/shared/model/estado-persona.model';
 import { EstadoPersonaService } from './estado-persona.service';
-import { IPersona } from 'app/shared/model/persona.model';
-import { PersonaService } from 'app/entities/persona/persona.service';
 
 @Component({
   selector: 'jhi-estado-persona-update',
@@ -19,41 +17,26 @@ import { PersonaService } from 'app/entities/persona/persona.service';
 export class EstadoPersonaUpdateComponent implements OnInit {
   isSaving: boolean;
 
-  personas: IPersona[];
-
   editForm = this.fb.group({
     id: [],
     nombreEstadoPersona: [],
-    estadoPersona: []
+    fecha: []
   });
 
-  constructor(
-    protected jhiAlertService: JhiAlertService,
-    protected estadoPersonaService: EstadoPersonaService,
-    protected personaService: PersonaService,
-    protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
-  ) {}
+  constructor(protected estadoPersonaService: EstadoPersonaService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
 
   ngOnInit() {
     this.isSaving = false;
     this.activatedRoute.data.subscribe(({ estadoPersona }) => {
       this.updateForm(estadoPersona);
     });
-    this.personaService
-      .query()
-      .pipe(
-        filter((mayBeOk: HttpResponse<IPersona[]>) => mayBeOk.ok),
-        map((response: HttpResponse<IPersona[]>) => response.body)
-      )
-      .subscribe((res: IPersona[]) => (this.personas = res), (res: HttpErrorResponse) => this.onError(res.message));
   }
 
   updateForm(estadoPersona: IEstadoPersona) {
     this.editForm.patchValue({
       id: estadoPersona.id,
       nombreEstadoPersona: estadoPersona.nombreEstadoPersona,
-      estadoPersona: estadoPersona.estadoPersona
+      fecha: estadoPersona.fecha != null ? estadoPersona.fecha.format(DATE_TIME_FORMAT) : null
     });
   }
 
@@ -76,7 +59,7 @@ export class EstadoPersonaUpdateComponent implements OnInit {
       ...new EstadoPersona(),
       id: this.editForm.get(['id']).value,
       nombreEstadoPersona: this.editForm.get(['nombreEstadoPersona']).value,
-      estadoPersona: this.editForm.get(['estadoPersona']).value
+      fecha: this.editForm.get(['fecha']).value != null ? moment(this.editForm.get(['fecha']).value, DATE_TIME_FORMAT) : undefined
     };
   }
 
@@ -91,12 +74,5 @@ export class EstadoPersonaUpdateComponent implements OnInit {
 
   protected onSaveError() {
     this.isSaving = false;
-  }
-  protected onError(errorMessage: string) {
-    this.jhiAlertService.error(errorMessage, null, null);
-  }
-
-  trackPersonaById(index: number, item: IPersona) {
-    return item.id;
   }
 }

@@ -19,11 +19,12 @@
             <column name="nombre_estado_persona" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="estado_persona_id" type="bigint">
+            <column name="fecha" type="datetime">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
+        <dropDefaultValue tableName="estado_persona" columnName="fecha" columnDataType="datetime"/>
     </changeSet>
 
     <changeSet id="20191028203802-1-relations" author="jhipster">
@@ -46,6 +47,7 @@
                   tableName="estado_persona">
             <column name="id" type="numeric"/>
             <column name="nombre_estado_persona" type="string"/>
+            <column name="fecha" type="datetime"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
         </loadData>
     </changeSet>

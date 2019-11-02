@@ -21,6 +21,13 @@
     "relationships": [
         {
             "relationshipType": "many-to-one",
+            "otherEntityName": "estadoPersona",
+            "otherEntityRelationshipName": "persona",
+            "relationshipName": "personaEstado",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
             "otherEntityName": "user",
             "otherEntityRelationshipName": "persona",
             "relationshipName": "personaUser",

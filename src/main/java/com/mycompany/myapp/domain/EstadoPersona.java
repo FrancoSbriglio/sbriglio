@@ -1,9 +1,9 @@
 package com.mycompany.myapp.domain;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.time.ZonedDateTime;
 
 /**
  * A EstadoPersona.
@@ -21,9 +21,8 @@ public class EstadoPersona implements Serializable {
     @Column(name = "nombre_estado_persona")
     private String nombreEstadoPersona;
 
-    @ManyToOne
-    @JsonIgnoreProperties("estadoPersonas")
-    private Persona estadoPersona;
+    @Column(name = "fecha")
+    private ZonedDateTime fecha;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -47,17 +46,17 @@ public class EstadoPersona implements Serializable {
         this.nombreEstadoPersona = nombreEstadoPersona;
     }
 
-    public Persona getEstadoPersona() {
-        return estadoPersona;
+    public ZonedDateTime getFecha() {
+        return fecha;
     }
 
-    public EstadoPersona estadoPersona(Persona persona) {
-        this.estadoPersona = persona;
+    public EstadoPersona fecha(ZonedDateTime fecha) {
+        this.fecha = fecha;
         return this;
     }
 
-    public void setEstadoPersona(Persona persona) {
-        this.estadoPersona = persona;
+    public void setFecha(ZonedDateTime fecha) {
+        this.fecha = fecha;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -82,6 +81,7 @@ public class EstadoPersona implements Serializable {
         return "EstadoPersona{" +
             "id=" + getId() +
             ", nombreEstadoPersona='" + getNombreEstadoPersona() + "'" +
+            ", fecha='" + getFecha() + "'" +
             "}";
     }
 }

@@ -31,7 +31,11 @@ public class Persona implements Serializable {
     private Integer dniPersona;
 
     @Column(name = "telefono_persona")
-    private Long telefonoPersona;
+    private Integer telefonoPersona;
+
+    @ManyToOne
+    @JsonIgnoreProperties("personas")
+    private EstadoPersona personaEstado;
 
     @ManyToOne
     @JsonIgnoreProperties("personas")
@@ -99,17 +103,30 @@ public class Persona implements Serializable {
         this.dniPersona = dniPersona;
     }
 
-    public Long getTelefonoPersona() {
+    public Integer getTelefonoPersona() {
         return telefonoPersona;
     }
 
-    public Persona telefonoPersona(Long defaultTelefonoPersona) {
-        this.telefonoPersona = defaultTelefonoPersona;
+    public Persona telefonoPersona(Integer telefonoPersona) {
+        this.telefonoPersona = telefonoPersona;
         return this;
     }
 
-    public void setTelefonoPersona(Long telefonoPersona) {
+    public void setTelefonoPersona(Integer telefonoPersona) {
         this.telefonoPersona = telefonoPersona;
+    }
+
+    public EstadoPersona getPersonaEstado() {
+        return personaEstado;
+    }
+
+    public Persona personaEstado(EstadoPersona estadoPersona) {
+        this.personaEstado = estadoPersona;
+        return this;
+    }
+
+    public void setPersonaEstado(EstadoPersona estadoPersona) {
+        this.personaEstado = estadoPersona;
     }
 
     public User getPersonaUser() {
@@ -147,10 +164,7 @@ public class Persona implements Serializable {
         return this;
     }
 
- 
-    public void setVehiculos(Set<Vehiculo> vehiculos) {
-        this.vehiculos = vehiculos;
-    }
+    
 
     public Set<Domicilio> getPersonadomicilios() {
         return personadomicilios;
