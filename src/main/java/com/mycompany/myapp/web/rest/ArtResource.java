@@ -103,6 +103,13 @@ public class ArtResource {
         return ResponseUtil.wrapOrNotFound(art);
     }
 
+    @GetMapping("/arts/persona/{id}")
+    public ResponseEntity<Art> getArtpersona(@PathVariable Long id) {
+        log.debug("REST request to get Art : {}", id);
+        Optional<Art> art = artRepository.findAllart(id);
+        return ResponseUtil.wrapOrNotFound(art);
+    }
+
     /**
      * {@code DELETE  /arts/:id} : delete the "id" art.
      *
