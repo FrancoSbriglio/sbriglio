@@ -1,6 +1,9 @@
 package com.mycompany.myapp.web.rest;
 
+import com.mycompany.myapp.domain.Authority;
+import com.mycompany.myapp.domain.Domicilio;
 import com.mycompany.myapp.domain.Persona;
+import com.mycompany.myapp.domain.Vehiculo;
 import com.mycompany.myapp.repository.PersonaRepository;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 
@@ -17,6 +20,7 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * REST controller for managing {@link com.mycompany.myapp.domain.Persona}.
@@ -103,6 +107,57 @@ public class PersonaResource {
         return ResponseUtil.wrapOrNotFound(persona);
     }
 
+    @GetMapping("/personas/dni/{dnipersona}")
+    public ResponseEntity<Persona> getPersonadni(@PathVariable Integer dnipersona) {
+        log.debug("REST request to get Persona : {}", dnipersona);
+        Optional<Persona> persona = personaRepository.findAlldnipersona(dnipersona);
+        return ResponseUtil.wrapOrNotFound(persona);
+    }
+    @GetMapping("/persona/personarol/")
+    public List<Persona> getUserrol(@RequestParam(required = false, defaultValue = "false") String role) { //ya se que va param igual funciona lo probe para ver si no me tiraba error
+        log.debug("REST request to get Persona : {}",role);
+        List<Persona> persona = personaRepository.findAlluserrol(role);
+        return persona;
+    }
+
+    @GetMapping("/persona/useremail/{email}")
+     public Persona getUserperson(@PathVariable String email) { 
+         log.debug("REST request to get Persona : {}",email);
+         Persona persona = personaRepository.findAlluseremail(email);
+         Set<Authority> auth = personaRepository.findAlluseremail1(email);
+        //  for (Persona p : persona) {
+             persona.getPersonaUser().setAuthorities(auth);
+          //} 
+         
+         return persona;
+     }
+
+      @GetMapping("/personasdom/domicilio/{id}")
+    public List<Persona> getPersonadom(@PathVariable Long id) {
+        log.debug("REST request to get Persona : {}", id);
+        
+        Set<Domicilio> domicilios = personaRepository.findAlldomicilio(id);
+        // iterator.next se usa para obtener el primer elemento de la lsita domicilios
+        Long id_casa = domicilios.iterator().next().getId();
+        List<Persona> persona = personaRepository.findAlldomicilio1(id_casa);  
+         return persona;
+     } 
+
+     @GetMapping("/persona/userperson/")
+     public Persona getUserpersona(@RequestParam(required = false, defaultValue = "false") Long id) { //ya se que va param igual funciona lo probe para ver si no me tiraba error
+         log.debug("REST request to get Persona : {}",id);
+         Persona persona = personaRepository.findAlluserperson(id);
+         Set<Vehiculo> vehiculo = personaRepository.findAlluserperson1(id);
+         persona.vehiculos(vehiculo);
+         return persona;
+     }
+
+     @GetMapping("/personas/estado/{id}")
+     public List<Persona> getPersonae(@PathVariable Long id) {
+         log.debug("REST request to get Persona : {}", id);
+         List<Persona> persona = personaRepository.findAllestado(id);
+         return persona;
+     }
     /**
      * {@code DELETE  /personas/:id} : delete the "id" persona.
      *

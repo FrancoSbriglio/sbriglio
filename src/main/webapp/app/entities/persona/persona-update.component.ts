@@ -27,7 +27,7 @@ import { DomicilioService } from 'app/entities/domicilio/domicilio.service';
 export class PersonaUpdateComponent implements OnInit {
   isSaving: boolean;
 
-  estadopersonas: IEstadoPersona[];
+  personaestados: IEstadoPersona[];
 
   users: IUser[];
 
@@ -67,12 +67,30 @@ export class PersonaUpdateComponent implements OnInit {
       this.updateForm(persona);
     });
     this.estadoPersonaService
-      .query()
+      .query({ filter: 'persona-is-null' })
       .pipe(
         filter((mayBeOk: HttpResponse<IEstadoPersona[]>) => mayBeOk.ok),
         map((response: HttpResponse<IEstadoPersona[]>) => response.body)
       )
-      .subscribe((res: IEstadoPersona[]) => (this.estadopersonas = res), (res: HttpErrorResponse) => this.onError(res.message));
+      .subscribe(
+        (res: IEstadoPersona[]) => {
+          if (!this.editForm.get('personaEstado').value || !this.editForm.get('personaEstado').value.id) {
+            this.personaestados = res;
+          } else {
+            this.estadoPersonaService
+              .find(this.editForm.get('personaEstado').value.id)
+              .pipe(
+                filter((subResMayBeOk: HttpResponse<IEstadoPersona>) => subResMayBeOk.ok),
+                map((subResponse: HttpResponse<IEstadoPersona>) => subResponse.body)
+              )
+              .subscribe(
+                (subRes: IEstadoPersona) => (this.personaestados = [subRes].concat(res)),
+                (subRes: HttpErrorResponse) => this.onError(subRes.message)
+              );
+          }
+        },
+        (res: HttpErrorResponse) => this.onError(res.message)
+      );
     this.userService
       .query()
       .pipe(

@@ -29,7 +29,7 @@
                 <constraints nullable="true" />
             </column>
             <column name="persona_estado_id" type="bigint">
-                <constraints nullable="true" />
+                <constraints unique="true" nullable="true" uniqueConstraintName="ux_persona_persona_estado_id" />
             </column>
             <column name="persona_user_id" type="bigint">
                 <constraints nullable="true" />

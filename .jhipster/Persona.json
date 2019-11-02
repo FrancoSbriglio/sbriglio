@@ -20,11 +20,12 @@
     ],
     "relationships": [
         {
-            "relationshipType": "many-to-one",
+            "relationshipType": "one-to-one",
             "otherEntityName": "estadoPersona",
             "otherEntityRelationshipName": "persona",
             "relationshipName": "personaEstado",
-            "otherEntityField": "id"
+            "otherEntityField": "id",
+            "ownerSide": true
         },
         {
             "relationshipType": "many-to-one",

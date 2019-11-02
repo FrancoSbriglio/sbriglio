@@ -33,8 +33,8 @@ public class Persona implements Serializable {
     @Column(name = "telefono_persona")
     private Integer telefonoPersona;
 
-    @ManyToOne
-    @JsonIgnoreProperties("personas")
+    @OneToOne
+    @JoinColumn(unique = true)
     private EstadoPersona personaEstado;
 
     @ManyToOne
@@ -165,6 +165,10 @@ public class Persona implements Serializable {
     }
 
     
+
+    public void setVehiculos(Set<Vehiculo> vehiculos) {
+        this.vehiculos = vehiculos;
+    }
 
     public Set<Domicilio> getPersonadomicilios() {
         return personadomicilios;
