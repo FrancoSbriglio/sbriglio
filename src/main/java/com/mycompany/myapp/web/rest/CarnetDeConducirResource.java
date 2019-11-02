@@ -103,6 +103,13 @@ public class CarnetDeConducirResource {
         return ResponseUtil.wrapOrNotFound(carnetDeConducir);
     }
 
+    @GetMapping("/carnet/persona/{id}")
+    public ResponseEntity<CarnetDeConducir> getCarnetDeConducirpersona(@PathVariable Long id) {
+        log.debug("REST request to get CarnetDeConducir : {}", id);
+        Optional<CarnetDeConducir> carnetDeConducir = carnetDeConducirRepository.findAllcarnet(id);
+        return ResponseUtil.wrapOrNotFound(carnetDeConducir);
+    }
+
     /**
      * {@code DELETE  /carnet-de-conducirs/:id} : delete the "id" carnetDeConducir.
      *
