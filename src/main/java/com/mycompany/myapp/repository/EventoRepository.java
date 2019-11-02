@@ -26,8 +26,8 @@ public interface EventoRepository extends JpaRepository<Evento, Long> {
     @Query("select evento from Evento evento left join fetch evento.eventoDetalles where evento.id =:id")
     Optional<Evento> findOneWithEagerRelationships(@Param("id") Long id);
 
-    @Query("select e from Evento e  join e.eventoEspacio ec where e.fecha =:fecha and ec.nombreEspacioComun=:nombre")
-    List<Evento> findAlleventosdia(@Param("fecha") ZonedDateTime fecha,@Param("nombre") String nombre);
+    @Query("select e from Evento e  join e.eventoEspacio ec where e.fecha =:fecha and ec.id=:id")
+    List<Evento> findAlleventosdia(@Param("fecha") ZonedDateTime fecha,@Param("id") Long id);
 
 
 }
