@@ -22,12 +22,14 @@ public interface EventoRepository extends JpaRepository<Evento, Long> {
 
     @Query("select distinct evento from Evento evento left join fetch evento.eventoDetalles")
     List<Evento> findAllWithEagerRelationships();
-
+//a
     @Query("select evento from Evento evento left join fetch evento.eventoDetalles where evento.id =:id")
     Optional<Evento> findOneWithEagerRelationships(@Param("id") Long id);
 
-    @Query("select e from Evento e  join e.eventoEspacio ec where e.fecha =:fecha and ec.id=:id")
+    @Query("select e from Evento e join e.eventoEspacio ec where e.fecha =:fecha and ec.id=:id")
     List<Evento> findAlleventosdia(@Param("fecha") ZonedDateTime fecha,@Param("id") Long id);
 
+    @Query("select e from Evento e join e.eventoEspacio ec where ec.id=:id")
+    List<Evento> findAlleventosespacio(@Param("id") Long id);
 
 }
