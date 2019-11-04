@@ -111,6 +111,12 @@ public class EventoResource {
         return evento;
     }
 
+    @GetMapping("/eventosespacio/{id}")
+    public List<Evento> getEventoespacio(@PathVariable Long id) {
+        log.debug("REST request to get Evento : {}", id);
+        List<Evento> evento = eventoRepository.findAlleventosespacio(id);
+        return evento;
+    }
     /**
      * {@code DELETE  /eventos/:id} : delete the "id" evento.
      *
