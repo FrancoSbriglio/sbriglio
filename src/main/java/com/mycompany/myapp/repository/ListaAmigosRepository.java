@@ -34,4 +34,8 @@ public interface ListaAmigosRepository extends JpaRepository<ListaAmigos, Long> 
 
     @Query("select listaAmigos.amigos from ListaAmigos listaAmigos where listaAmigos.pertenece.dniPersona =:dniPersona")
     Set<Persona> findAlllistadni1(@Param("dniPersona") Integer dniPersona);
+
+    @Query("select la.amigos from ListaAmigos la join la.amigos a where a.dniPersona=:dni and la.id=:id")
+    List<Persona> findAllexistepersona(@Param("dni") Integer dni,@Param("id") Long id);
+
 }

@@ -116,6 +116,14 @@ public class ListaAmigosResource {
         return listaAmigos;
     }
 
+    @GetMapping("/listaexiste/")
+         public List<Persona> getListaAmigospertenece(@RequestParam Integer dni,@RequestParam Long id) {
+   //     public List<Persona> getListaAmigospertenece(@PathVariable Integer dni,Long id) {
+        log.debug("REST request to get ListaAmigos : {}", id);
+        List<Persona> listaAmigos = listaAmigosRepository.findAllexistepersona(dni,id);
+        return listaAmigos;
+    }
+
     /**
      * {@code DELETE  /lista-amigos/:id} : delete the "id" listaAmigos.
      *
