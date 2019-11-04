@@ -181,6 +181,12 @@ public class UserResource {
         return ResponseUtil.wrapOrNotFound(qR);
     }
  
+    @GetMapping("/users/email/{email}")
+    public ResponseEntity<User> getPersonae(@PathVariable String email) {
+        log.debug("REST request to get Persona : {}", email);
+        Optional<User> user = userRepository.findByEmail(email);
+        return ResponseUtil.wrapOrNotFound(user);
+    }
 
     /**
      * {@code DELETE /users/:login} : delete the "login" User.
