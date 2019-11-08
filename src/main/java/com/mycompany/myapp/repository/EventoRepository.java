@@ -32,4 +32,7 @@ public interface EventoRepository extends JpaRepository<Evento, Long> {
     @Query("select e from Evento e join e.eventoEspacio ec where ec.id=:id")
     List<Evento> findAlleventosespacio(@Param("id") Long id);
 
+    @Query("select e from Evento e join e.eventoPersona  ep where ep.id=:id")
+    List<Evento> findAlleventospersona(@Param("id") Long id);
+
 }
